@@ -4,9 +4,12 @@ export function StatBand() {
   const stats = raceStats();
   const cells = [
     { n: String(stats.count), label: "Races" },
-    { n: String(stats.seasons), label: "Seasons" },
     { n: stats.vert, label: "Feet climbed" },
     { n: stats.longest, label: "Longest day" },
+    {
+      n: String(stats.podiums),
+      label: stats.podiums === 1 ? "Podium" : "Podiums",
+    },
   ];
 
   return (

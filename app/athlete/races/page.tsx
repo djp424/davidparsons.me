@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { AlpenglowHeader, AlpenglowFooter } from "@/components/athlete/athlete-chrome";
+import {
+  AlpenglowHeader,
+  AlpenglowFooter,
+} from "@/components/athlete/athlete-chrome";
 import { RaceRow, RaceTableHead } from "@/components/athlete/race-row";
 import { racesByYear, raceStats } from "@/content/races";
 
@@ -7,7 +10,7 @@ const stats = raceStats();
 
 export const metadata: Metadata = {
   title: "Race results",
-  description: `Every race David Parsons has finished — ${stats.count} of them between ${stats.firstYear} and ${stats.lastYear}, across skimo, trail, gravel and road.`,
+  description: `Every race David Parsons has finished — ${stats.count} of them, ${stats.span}, across skimo and mountain trail running.`,
   alternates: { canonical: "/athlete/races" },
 };
 
@@ -27,9 +30,9 @@ export default function RacesPage() {
             Race results
           </h1>
           <p className="max-w-[640px] pt-4 text-[16px] leading-[1.6] text-alp-body text-pretty sm:text-[18px]">
-            Every race I have finished, {stats.firstYear} to {stats.lastYear} —
-            skimo, trail, gravel and one road 10K. Kept mostly so I can find it
-            later; mid-pack is the honest word for most of it.
+            Every race I have finished, {stats.span}. Times, placings and
+            whatever links the organisers left online. Kept mostly so I can find
+            it later; mid-pack is the honest word for most of it.
           </p>
         </section>
 

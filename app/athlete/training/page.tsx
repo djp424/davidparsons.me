@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import { AlpenglowHeader, AlpenglowFooter } from "@/components/athlete/athlete-chrome";
+import {
+  AlpenglowHeader,
+  AlpenglowFooter,
+} from "@/components/athlete/athlete-chrome";
 import { climbing, gear, objectives } from "@/content/athlete";
 import { external } from "@/lib/links";
 import { elsewhere } from "@/content/athlete";

@@ -42,6 +42,45 @@ child of `<body>` rather than the body itself, so `globals.css` repaints the
 body from `body:has(.alpenglow)`. Change the wrapper class and that selector
 together or the paper ground shows through in overscroll.
 
+## Adding a race
+
+Add one object to `races` in `content/races.ts` — anywhere in the array, the
+list sorts itself by date. Only `date`, `event`, `sport` and `location` are
+required; leave out anything the results did not publish and the row still
+reads cleanly (a missing figure shows as an em dash rather than a zero).
+
+```ts
+{
+  date: "2027-03-27",              // ISO. The year, the grouping and the
+  event: "Grand Traverse",         // displayed date all derive from this.
+  sport: "Skimo",                  // Skimo | Trail | Road | Bike | Climb
+  location: "Crested Butte, CO",
+  distance: "40 mi",
+  vert: "7,800 ft",
+  time: "11:06:44",
+  placing: { overall: 71, field: 200 },
+  note: "Team, with Annie Weinmann",
+  links: [
+    { kind: "results", url: "…" },
+    { kind: "strava", url: "…" },
+  ],
+}
+```
+
+`placing` also takes `division`, `divisionPlace` and `divisionField` for a
+category result. A top-three finish overall or in a division is highlighted
+in the accent automatically — there is no flag to set and no way to forget.
+
+`links` renders as the `[results] [strava]` chips under the event name, the
+same idiom the speaking page uses. The kinds are a fixed list (`event`,
+`results`, `result`, `splits`, `strava`, `photos`, `instagram`, `report`) so
+labels stay consistent; add a `label` to override one, or a new kind to
+`RaceLinkKind` and `linkLabels` together.
+
+This is TypeScript rather than a JSON file on purpose: `npm run build` fails
+on a typo'd field, an unknown sport or a malformed link, and the editor
+autocompletes the enums. JSON would ship those mistakes silently.
+
 ## Adding a post
 
 Drop a `.mdx` file in `content/notes/`. The filename becomes the URL.

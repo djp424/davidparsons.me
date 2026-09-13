@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AlpenglowHeader, AlpenglowFooter } from "@/components/athlete/athlete-chrome";
+import {
+  AlpenglowHeader,
+  AlpenglowFooter,
+} from "@/components/athlete/athlete-chrome";
 import { StatBand } from "@/components/athlete/stat-band";
 import { StravaWeek } from "@/components/athlete/strava-week";
 import { RaceRow } from "@/components/athlete/race-row";
@@ -11,7 +14,7 @@ const stats = raceStats();
 
 export const metadata: Metadata = {
   title: "Athlete",
-  description: `Amateur skimo, trail running and climbing out of Boulder, Colorado — ${stats.count} races logged since ${stats.firstYear}.`,
+  description: `Amateur skimo, trail running and climbing out of Boulder, Colorado — every race logged, ${stats.count} of them so far.`,
   alternates: { canonical: "/athlete" },
 };
 
@@ -119,12 +122,11 @@ export default function AthletePage() {
             </h1>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-alp-body text-pretty sm:text-[18px]">
               Skimo through the winter, trail races all summer, and rock
-              whenever the Flatirons are dry. {stats.count} races logged since{" "}
-              {stats.firstYear} — every one of them is on this page.
+              whenever the Flatirons are dry. Every race I finish gets logged
+              here — {stats.count} of them so far.
             </p>
           </div>
         </section>
-
 
         <StatBand />
         <StravaWeek />
@@ -138,7 +140,7 @@ export default function AthletePage() {
               href="/athlete/races"
               className="font-mono text-[11px] tracking-[0.12em] text-alp-accent uppercase hover:underline"
             >
-              All {stats.count} races &rarr;
+              The full log &rarr;
             </Link>
           </div>
           <div className="flex flex-col border-b border-alp-hair">
