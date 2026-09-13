@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <style>
+    body { margin: 0; background: #0E1113; }
+    a { color: #9CC5CE; text-decoration: none; }
+    a:hover { color: #C2E0E7; }
+    .u { border-bottom: 1px solid rgba(156, 197, 206, 0.38); padding-bottom: 1px; }
+    .u:hover { border-bottom-color: #9CC5CE; }
+  </style>
+</helmet>
+
+<div style="position: relative; width: 1280px; min-height: 1080px; background: #0E1113; color: #D8DEE0; display: flex; flex-direction: column; overflow: hidden;">
+
+  <header style="border-bottom: 1px solid #232A2D; background: #151A1C;">
+    <div style="max-width: 1040px; margin: 0 auto; padding: 0 40px; min-height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="#" style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: #EEF3F4;">david<span style="color: #5C696D;">parsons</span>.me</a>
+      <div style="display: flex; align-items: center; gap: 28px;">
+        <nav style="display: flex; gap: 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 13px;">
+          <a href="#" style="color: #EEF3F4; border-bottom: 1px solid #9CC5CE; padding-bottom: 3px;">Notes</a>
+          <a href="#" style="color: #79878C;">Speaking</a>
+          <a href="#" style="color: #79878C;">Contact</a>
+        </nav>
+        <span style="display: inline-flex; align-items: center; gap: 8px; min-height: 30px; padding: 0 11px; border: 1px solid #232A2D; background: #1B2225; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #79878C;">
+          <span style="color: #5C696D;">Jump to</span>
+          <span style="color: #9CC5CE;">&#8984;K</span>
+        </span>
+      </div>
+    </div>
+  </header>
+  <main style="max-width: 1040px; width: 100%; margin: 0 auto; padding: 72px 40px 80px; display: flex; flex-direction: column;">
+
+    <div style="max-width: 620px; display: flex; flex-direction: column; gap: 14px;">
+    <div style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: #D2A16A;">Notes</div>
+      <h1 style="margin: 0; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 36px; font-weight: 600; line-height: 1.15; letter-spacing: -0.028em; color: #EEF3F4;">Notes</h1>
+      <p style="margin: 0; font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 17px; line-height: 1.7; color: #79878C;">Conference notes, a server rebuild, and a couple of posts from a long time ago.</p>
+    </div>
+
+    <div style="display: flex; flex-direction: column; border: 1px solid #232A2D; margin-top: 44px;">
+      <a href="#" style="display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 22px 24px; background: #151A1C;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9CC5CE; letter-spacing: 0.02em;">2017.02.19</span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #5C696D;">General</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em; color: #EEF3F4;">Automating My Personal Site Updates</span>
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: #79878C; text-wrap: pretty;">I recently moved this site over to DigitalOcean. I decided to start everything over from scratch.</span>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 22px 24px; background: #151A1C; border-top: 1px solid #232A2D;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9CC5CE; letter-spacing: 0.02em;">2016.04.05</span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #5C696D;">Conferences</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em; color: #EEF3F4;">Git Merge 2016 Conference Notes</span>
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: #79878C; text-wrap: pretty;">Bitmaps beat arrays, use HTTPS, merge instead of rebase, and keep submodules one level deep.</span>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 22px 24px; background: #151A1C; border-top: 1px solid #232A2D;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9CC5CE; letter-spacing: 0.02em;">2013.03.23</span>
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #5C696D;">Conferences</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em; color: #EEF3F4;">WordCamp Miami 2013 Notes</span>
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: #79878C; text-wrap: pretty;">Storytelling in web design, WordPress performance on the stack, and a freelance primer.</span>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 22px 24px; background: #151A1C; border-top: 1px solid #232A2D;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9CC5CE; letter-spacing: 0.02em;">2012.12.09</span>
+
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em; color: #EEF3F4;">An Open Sourced Life</span>
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: #79878C; text-wrap: pretty;">If this is your first time here, this is my personal site. I found my passion for Computer Science in these past few years.</span>
+        </div>
+      </a>
+      <a href="#" style="display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 24px; padding: 22px 24px; background: #151A1C; border-top: 1px solid #232A2D;">
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #9CC5CE; letter-spacing: 0.02em;">2012.11.14</span>
+
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 7px;">
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 20px; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em; color: #EEF3F4;">Hello world!</span>
+          <span style="font-family: 'IBM Plex Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.65; color: #79878C; text-wrap: pretty;">You had me at hello world!</span>
+        </div>
+      </a>
+    </div>
+  </main>
+
+  <footer style="border-top: 1px solid #232A2D; margin-top: auto;">
+    <div style="max-width: 1040px; margin: 0 auto; padding: 26px 40px; display: flex; justify-content: space-between; align-items: center; gap: 24px; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #5C696D;">
+      <span>Elsewhere</span>
+      <span style="display: flex; gap: 22px;">
+        <a href="#" style="color: #79878C;">Twitter</a>
+        <a href="#" style="color: #79878C;">Github</a>
+        <a href="#" style="color: #79878C;">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>

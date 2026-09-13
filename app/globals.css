@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #fafaf8;
+  --color-ink: #17191a;
+  --color-body: #2e3230;
+  --color-muted: #6b706e;
+  --color-faint: #9a9e9b;
+  --color-fainter: #a8aca8;
+  --color-rule: #e4e4e0;
+  --color-hair: #c6c8c3;
+
+  --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The quiet link: a hairline that firms up on hover, never a colour change. */
+.lk {
+  border-bottom: 1px solid var(--color-hair);
+  padding-bottom: 1px;
+  transition: border-color 120ms ease;
+}
+
+.lk:hover {
+  border-bottom-color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

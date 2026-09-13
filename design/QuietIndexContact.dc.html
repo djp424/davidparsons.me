@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #FAFAF8; }
+    a { color: #17191A; text-decoration: none; }
+    a:hover { color: #17191A; }
+    .lk { border-bottom: 1px solid #C6C8C3; padding-bottom: 1px; }
+    .lk:hover { border-bottom-color: #17191A; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; min-height: 900px; background: #FAFAF8; font-family: Newsreader, Georgia, serif; color: #17191A; display: flex; flex-direction: column;">
+
+  <header style="max-width: 720px; width: 100%; margin: 0 auto; padding: 44px 0 18px; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E4E0;">
+    <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #17191A;">David Parsons</a>
+    <nav style="display: flex; gap: 26px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">
+      <a href="#" style="color: #6B706E;">Notes</a>
+      <a href="#" style="color: #6B706E;">Speaking</a>
+      <a href="#" style="color: #17191A; border-bottom: 1px solid #17191A; padding-bottom: 2px;">Contact</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 720px; width: 100%; margin: 0 auto; padding: 88px 0 0; display: flex; flex-direction: column;">
+
+    <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 24px; padding-bottom: 52px;">
+      <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9A9E9B; padding-top: 14px;">Contact</div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <h1 style="margin: 0; font-size: 38px; font-weight: 400; line-height: 1.15; letter-spacing: -0.012em;">You know what to do!</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 1.7; color: #6B706E;">Write below and it lands in my inbox. I read everything.</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 24px;">
+      <div></div>
+      <div style="display: flex; flex-direction: column; gap: 30px;">
+
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px;">
+          <label style="display: flex; flex-direction: column; gap: 9px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B706E;">Name</span>
+            <span style="border-bottom: 1px solid #C6C8C3; padding: 6px 0 10px; font-size: 18px; color: #B4B8B4;">&nbsp;</span>
+          </label>
+          <label style="display: flex; flex-direction: column; gap: 9px;">
+            <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B706E;">Email</span>
+            <span style="border-bottom: 1px solid #C6C8C3; padding: 6px 0 10px; font-size: 18px; color: #B4B8B4;">&nbsp;</span>
+          </label>
+        </div>
+
+        <label style="display: flex; flex-direction: column; gap: 9px;">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B706E;">Message</span>
+          <span style="border-bottom: 1px solid #C6C8C3; padding: 6px 0 10px; font-size: 18px; color: #B4B8B4; min-height: 116px;">&nbsp;</span>
+        </label>
+
+        <div style="display: flex; align-items: center; gap: 20px; padding-top: 4px;">
+          <a href="#" style="display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 0 26px; background: #17191A; color: #FAFAF8; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;">Send</a>
+          <span style="font-size: 15px; color: #9A9E9B;">Usually a reply within a day or two.</span>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer style="max-width: 720px; width: 100%; margin: auto auto 0; padding: 72px 0 56px;">
+    <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #6B706E;">You can also find me on <a href="#" class="lk" style="color: #2E3230;">Twitter</a>, <a href="#" class="lk" style="color: #2E3230;">Github</a> and <a href="#" class="lk" style="color: #2E3230;">LinkedIn</a>.</p>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>

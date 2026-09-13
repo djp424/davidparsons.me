@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #FFFFFF; }
+    a { color: #1C6E7E; text-decoration: none; }
+    a:hover { color: #15545F; }
+    .u { background-image: linear-gradient(#1C6E7E, #1C6E7E); background-repeat: no-repeat; background-size: 100% 1px; background-position: 0 100%; padding-bottom: 2px; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; min-height: 900px; background: #FFFFFF; color: #101413; display: flex; align-items: stretch;">
+
+    <aside style="width: 340px; flex: none; background: #F5F7F6; border-right: 1px solid #E4E8E7; padding: 56px 40px; display: flex; flex-direction: column; gap: 40px;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="#" style="font-family: 'Space Grotesk', sans-serif; font-size: 26px; font-weight: 600; letter-spacing: -0.022em; color: #101413;">David Parsons</a>
+        <p style="margin: 0; font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; line-height: 1.6; color: #5F6A68;">Software engineer. Fifteen years on the web.</p>
+      </div>
+
+      <nav style="display: flex; flex-direction: column; margin-left: -15px;">
+        <a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 44px; color: #5F6A68; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 400;">
+          <span style="width: 3px; height: 18px; background: transparent;"></span>
+          <span>About</span>
+        </a>
+        <a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 44px; color: #5F6A68; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 400;">
+          <span style="width: 3px; height: 18px; background: transparent;"></span>
+          <span>Notes</span>
+        </a>
+        <a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 44px; color: #5F6A68; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 400;">
+          <span style="width: 3px; height: 18px; background: transparent;"></span>
+          <span>Speaking</span>
+        </a>
+        <a href="#" style="display: flex; align-items: center; gap: 12px; min-height: 44px; color: #101413; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 500;">
+          <span style="width: 3px; height: 18px; background: #1C6E7E;"></span>
+          <span>Contact</span>
+        </a>
+      </nav>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; margin-top: auto;">
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #97A2A0;">Elsewhere</div>
+        <div style="display: flex; flex-direction: column; gap: 9px; font-family: 'IBM Plex Sans', sans-serif; font-size: 15px;">
+          <a href="#" class="u">Twitter</a>
+          <a href="#" class="u">Github</a>
+          <a href="#" class="u">LinkedIn</a>
+        </div>
+      </div>
+    </aside>
+    <main style="flex: 1 1 auto; padding: 72px 88px; display: flex; flex-direction: column;">
+
+      <div style="max-width: 560px; display: flex; flex-direction: column; gap: 12px;">
+        <h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 600; line-height: 1.15; letter-spacing: -0.028em;">You know what to do!</h1>
+        <p style="margin: 0; font-family: 'IBM Plex Sans', sans-serif; font-size: 17px; line-height: 1.7; color: #5F6A68;">Write below and it lands in my inbox. I read everything.</p>
+      </div>
+
+      <div style="max-width: 560px; display: flex; flex-direction: column; gap: 22px; padding-top: 40px;">
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px;">
+
+        <label style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #5F6A68;">Name</span>
+          <span style="display: block; border: 1px solid #1C6E7E; box-shadow: 0 0 0 3px rgba(28, 110, 126, 0.12); background: #FFFFFF; min-height: 48px; padding: 13px 15px; font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; color: #A9B2B0;"><span style="border-left: 1.5px solid #1C6E7E; padding-left: 1px;"></span></span>
+        </label>
+
+        <label style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #5F6A68;">Email</span>
+          <span style="display: block; border: 1px solid #E4E8E7; background: #FFFFFF; min-height: 48px; padding: 13px 15px; font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; color: #A9B2B0;">&nbsp;</span>
+        </label>
+        </div>
+
+        <label style="display: flex; flex-direction: column; gap: 8px;">
+          <span style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #5F6A68;">Message</span>
+          <span style="display: block; border: 1px solid #E4E8E7; background: #FFFFFF; min-height: 132px; padding: 13px 15px; font-family: 'IBM Plex Sans', sans-serif; font-size: 16px; color: #A9B2B0;">&nbsp;</span>
+        </label>
+        <div style="display: flex; align-items: center; gap: 18px; padding-top: 6px;">
+          <a href="#" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; background: #1C6E7E; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif; font-size: 15px; font-weight: 500;">Send message</a>
+          <span style="font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; color: #97A2A0;">Usually a reply within a day or two.</span>
+        </div>
+      </div>
+    </main>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "A · Home", "x": 0, "y": 0, "w": 1280, "h": 900 },
+    { "file": "QuietIndexNotes.dc.html", "title": "A · Notes", "x": 1400, "y": 0, "w": 1280, "h": 1080 },
+    { "file": "QuietIndexSpeaking.dc.html", "title": "A · Speaking", "x": 2800, "y": 0, "w": 1280, "h": 1560 },
+    { "file": "QuietIndexContact.dc.html", "title": "A · Contact", "x": 4200, "y": 0, "w": 1280, "h": 900 },
+
+    { "file": "StandingRailHome.dc.html", "title": "B · Home", "x": 0, "y": 1720, "w": 1280, "h": 900 },
+    { "file": "StandingRailNotes.dc.html", "title": "B · Notes", "x": 1400, "y": 1720, "w": 1280, "h": 1080 },
+    { "file": "StandingRailSpeaking.dc.html", "title": "B · Speaking", "x": 2800, "y": 1720, "w": 1280, "h": 1560 },
+    { "file": "StandingRailContact.dc.html", "title": "B · Contact", "x": 4200, "y": 1720, "w": 1280, "h": 900 },
+
+    { "file": "WorkbenchHome.dc.html", "title": "C · Home", "x": 0, "y": 3440, "w": 1280, "h": 900 },
+    { "file": "WorkbenchPalette.dc.html", "title": "C · Home with ⌘K open", "x": 1400, "y": 3440, "w": 1280, "h": 900 },
+    { "file": "WorkbenchNotes.dc.html", "title": "C · Notes", "x": 2800, "y": 3440, "w": 1280, "h": 1080 },
+    { "file": "WorkbenchSpeaking.dc.html", "title": "C · Speaking", "x": 4200, "y": 3440, "w": 1280, "h": 1560 },
+    { "file": "WorkbenchContact.dc.html", "title": "C · Contact", "x": 5600, "y": 3440, "w": 1280, "h": 900 }
+  ],
+  "annotations": [
+    {
+      "id": "intro",
+      "x": -540,
+      "y": -200,
+      "w": 420,
+      "text": "davidparsons.me — three directions\n\nSame real content in all three: your actual bio (employer dropped, 15 years in), the five notes, all 24 talks, the contact form.\n\nThese are static mockups for picking a look, not a working site. Once you pick, I build that one in Next.js.\n\nRows read left to right: Home, Notes, Speaking, Contact."
+    },
+    {
+      "id": "dir-a",
+      "x": -540,
+      "y": 40,
+      "w": 420,
+      "text": "A — Quiet Index\n\nThe site you have now, executed properly. Newsreader serif for prose, IBM Plex Mono for every date and label, one ink on warm paper, no accent colour at all.\n\nSignature: Speaking as a true index — years in the left gutter, venues left, dates right, a hairline between years rather than between rows.\n\nTradeoff: it's the quietest of the three. If you want the site to look obviously different from 2017, this is the smallest visible change."
+    },
+    {
+      "id": "dir-b",
+      "x": -540,
+      "y": 1760,
+      "w": 420,
+      "text": "B — Standing Rail\n\nAsymmetric: a fixed identity rail on the left carries your name, bio, nav and links on every page; content flows on the right. Space Grotesk set tight, IBM Plex Sans body, one deep teal used only for links and focus.\n\nSignature: the rail marks where you are, and link underlines draw in on hover.\n\nTradeoff: the rail costs 340px and has to collapse on a phone, so mobile becomes a second layout rather than the same one narrower."
+    },
+    {
+      "id": "dir-c",
+      "x": -540,
+      "y": 3480,
+      "w": 420,
+      "text": "C — Workbench\n\nInk-dark, mono-forward, two muted accents (cool for links and dates, warm for section labels). Reads like a well-made developer tool.\n\nSignature: a real ⌘K palette that jumps to any page, post or talk — second artboard in this row shows it open.\n\nTradeoff: dark-only says 'developer tool' more than 'person who writes'; your long conference-notes posts are harder to read on dark. The palette is also real code to build and keep working."
+    }
+  ],
+  "launch": { "view": "canvas" }
+}

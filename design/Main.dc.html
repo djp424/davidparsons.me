@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #FAFAF8; }
+    a { color: #17191A; text-decoration: none; }
+    a:hover { color: #17191A; }
+    .lk { border-bottom: 1px solid #C6C8C3; padding-bottom: 1px; }
+    .lk:hover { border-bottom-color: #17191A; }
+  </style>
+</helmet>
+
+<div style="width: 1280px; min-height: 900px; background: #FAFAF8; font-family: Newsreader, Georgia, serif; color: #17191A; display: flex; flex-direction: column;">
+
+  <header style="max-width: 720px; width: 100%; margin: 0 auto; padding: 44px 0 18px; display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #E4E4E0;">
+    <a href="#" style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #17191A;">David Parsons</a>
+    <nav style="display: flex; gap: 26px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;">
+      <a href="#" style="color: #6B706E;">Notes</a>
+      <a href="#" style="color: #6B706E;">Speaking</a>
+      <a href="#" style="color: #6B706E;">Contact</a>
+    </nav>
+  </header>
+
+  <main style="max-width: 720px; width: 100%; margin: 0 auto; padding: 96px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9A9E9B; padding-top: 22px;">About</div>
+    <div style="display: flex; flex-direction: column; gap: 26px;">
+      <h1 style="margin: 0; font-size: 50px; font-weight: 400; line-height: 1.08; letter-spacing: -0.015em; text-wrap: pretty;">Hello, I&rsquo;m David.</h1>
+      <p style="margin: 0; font-size: 19px; line-height: 1.75; color: #2E3230; text-wrap: pretty;">I&rsquo;ve spent 15 years building software for the web. You might also know me as the lead organizer of <a href="#" class="lk">WordCamp NYC 2017</a>.</p>
+      <p style="margin: 0; font-size: 19px; line-height: 1.75; color: #2E3230; text-wrap: pretty;">I speak at local meetups and conferences when I can. I&rsquo;ve taken a lot from this community, and it feels good to give back.</p>
+      <p style="margin: 0; font-size: 19px; line-height: 1.75; color: #2E3230; text-wrap: pretty;">If you want to get in touch, <a href="#" class="lk">say hello</a>.</p>
+    </div>
+  </main>
+
+  <section style="max-width: 720px; width: 100%; margin: 0 auto; padding: 88px 0 0; display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 0 24px;">
+    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #9A9E9B; padding-top: 20px;">Index</div>
+    <div style="display: flex; flex-direction: column;">
+
+      <a href="#" style="display: grid; grid-template-columns: 108px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 18px 0; border-top: 1px solid #E4E4E0;">
+        <span style="font-size: 19px;">Notes</span>
+        <span style="font-size: 15px; color: #6B706E;">Five posts, mostly conference notes</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9A9E9B; letter-spacing: 0.04em;">2012&ndash;2017</span>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 108px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 18px 0; border-top: 1px solid #E4E4E0;">
+        <span style="font-size: 19px;">Speaking</span>
+        <span style="font-size: 15px; color: #6B706E;">Twenty-four talks at meetups and camps</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9A9E9B; letter-spacing: 0.04em;">2012&ndash;2018</span>
+      </a>
+
+      <a href="#" style="display: grid; grid-template-columns: 108px minmax(0, 1fr) auto; gap: 20px; align-items: baseline; padding: 18px 0; border-top: 1px solid #E4E4E0; border-bottom: 1px solid #E4E4E0;">
+        <span style="font-size: 19px;">Contact</span>
+        <span style="font-size: 15px; color: #6B706E;">Send a note, or find me elsewhere</span>
+        <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #9A9E9B; letter-spacing: 0.04em;">&mdash;</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer style="max-width: 720px; width: 100%; margin: 0 auto; padding: 72px 0 56px; margin-top: auto;">
+    <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #6B706E;">You can also find me on <a href="#" class="lk" style="color: #2E3230;">Twitter</a>, <a href="#" class="lk" style="color: #2E3230;">Github</a> and <a href="#" class="lk" style="color: #2E3230;">LinkedIn</a>.</p>
+  </footer>
+
+</div>
+</x-dc>
+</body>
+</html>
