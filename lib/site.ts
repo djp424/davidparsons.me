@@ -3,7 +3,6 @@ export const site = {
   url: "https://davidparsons.me",
   description:
     "David Parsons — software engineer. Fifteen years building for the web.",
-  email: "hello@davidparsons.me",
   elsewhere: [
     { label: "Twitter", href: "https://twitter.com/djp424" },
     { label: "GitHub", href: "https://github.com/djp424" },

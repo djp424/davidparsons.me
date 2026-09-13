@@ -46,23 +46,41 @@ It appears on `/notes`, in `/rss.xml` and in `/sitemap.xml` automatically.
 
 ## Contact form
 
-`/contact` needs no API key, no account and no environment variables. It
-validates in the browser, then hands the message to the visitor's own email
-app through a prefilled `mailto:` link — subject and body already written,
-addressed to `site.email` in `lib/site.ts`. They press send in their mail
-client and it arrives from their real address, so replying just works.
+No API key, no account, no third party. The form validates in the browser,
+posts to `app/contact/compose/route.ts`, and gets back a prefilled `mailto:`
+link — subject and body already written. The visitor's own email app opens with
+the message ready, and because they press send, it arrives from their real
+address and replying just works.
 
-The tradeoff is that delivery depends on the visitor having a mail app set up,
-and a message is only sent if they press send there. Nothing is stored or sent
-server-side. Without JavaScript the form is replaced by the plain address.
+### Where the address lives
 
-To change where messages go, edit `email` in `lib/site.ts` — that is the only
-place it appears.
+In the `CONTACT_EMAIL` environment variable, read server-side only. It is
+never rendered into a page, never bundled into client JavaScript, and never
+written into the DOM — not even after a successful submit, where the link is
+held in React state and "try again" is a button rather than an anchor.
 
-If you ever want true server-side delivery — the message captured whether or
-not the visitor has a mail client — that needs a credential of some kind
-(a [Resend](https://resend.com) API key, or SMTP details). There is no way
-around that; a server cannot send mail as nobody.
+That is deliberate: a `mailto:` link sitting in the markup is exactly what
+address harvesters scrape. This is obfuscation from bulk scraping, not
+secrecy — anyone who posts a valid payload to `/contact/compose` gets the
+address back. The endpoint validates input and rate limits to 20 requests per
+IP per hour to make that tedious.
+
+Set it locally in `.env.local` and in the Vercel project settings:
+
+```
+CONTACT_EMAIL=you@example.com
+```
+
+If it is missing the endpoint returns 503 and the form says so plainly instead
+of failing silently.
+
+### The tradeoff
+
+Delivery depends on the visitor having a mail app set up, and a message only
+arrives if they press send there. Nothing is stored server-side, so an
+abandoned draft is lost. True server-side capture needs a credential of some
+kind (a [Resend](https://resend.com) API key, or SMTP details) — a server
+cannot send mail as nobody.
 
 ## Redirects from the old site
 

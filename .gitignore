@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Design canvas build output (re-seeded from the .dc.html working files)
 design/davidparsons-me-directions.html
+!.env.example
