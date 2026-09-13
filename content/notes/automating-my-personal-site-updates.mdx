@@ -1,0 +1,21 @@
+---
+title: "Automating My Personal Site Updates"
+date: "2017-02-19"
+updated: "2017-02-19"
+category: "General"
+excerpt: "I recently moved this site over to DigitalOcean. I decided to start everything over from scratch."
+---
+
+I recently moved [this site](https://davidparsons.me) over to [DigitalOcean](https://www.digitalocean.com/). I decided to start everything over from scratch. Here are the tutorials I went though:
+
+1. [Server Setup](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04)
+2. [LEMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-in-ubuntu-16-04)
+3. [HTTPS and HTTP2](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04)
+4. [WordPress](https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-lemp-on-ubuntu-16-04)
+5. [GZIP](https://www.digitalocean.com/community/tutorials/how-to-add-the-gzip-module-to-nginx-on-ubuntu-14-04)
+
+In addition, I wanted to automate the updates on my server including: Ubuntu, WordPress and Custom Github Code. I implemented auto-updates by doing the following:
+
+- Installing and configuring [unattended-upgrades](https://help.ubuntu.com/lts/serverguide/automatic-updates.html) instead of running "sudo apt-get update" and "sudo apt-get upgrade" every time I want to update the server.
+- Installed [WP-CLI](http://wp-cli.org/) to manage WP, themes and plugins.
+- Created a list of bash alias' and put them into my servers .bash_profile file to run a single command to update everything within the server.
