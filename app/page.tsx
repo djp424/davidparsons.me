@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Gutter } from "@/components/page-heading";
 import { allNotes } from "@/lib/notes";
 import { talks } from "@/content/speaking";
+import { external } from "@/lib/links";
 
 function IndexRow({
   href,
@@ -59,7 +60,7 @@ export default function Home() {
             <p className="text-[19px] leading-[1.75] text-body text-pretty">
               I&rsquo;ve spent 15 years building software for the web. You might
               also know me as the lead organizer of{" "}
-              <a className="lk" href="https://2017.nyc.wordcamp.org/">
+              <a className="lk" href="https://2017.nyc.wordcamp.org/" {...external}>
                 WordCamp NYC 2017
               </a>
               .

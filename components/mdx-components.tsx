@@ -1,4 +1,5 @@
 import type { MDXComponents } from "mdx/types";
+import { isExternal, external } from "@/lib/links";
 
 /**
  * Prose styles for migrated posts. These are mostly deep outline lists, so the
@@ -15,7 +16,14 @@ export const mdxComponents: MDXComponents = {
     <h3 className="pt-4 text-[21px] leading-[1.35] font-normal text-ink" {...props} />
   ),
   p: (props) => <p className="text-pretty" {...props} />,
-  a: (props) => <a className="lk" {...props} />,
+  a: ({ href, ...props }) => (
+    <a
+      className="lk"
+      href={href}
+      {...(isExternal(href) ? external : {})}
+      {...props}
+    />
+  ),
   strong: (props) => <strong className="font-medium text-ink" {...props} />,
   ul: (props) => (
     <ul

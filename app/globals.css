@@ -30,6 +30,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* Tailwind v4's reset drops the UA pointer cursor on buttons. Put it back. */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+summary {
+  cursor: pointer;
+}
+
 /* The quiet link: a hairline that firms up on hover, never a colour change. */
 .lk {
   border-bottom: 1px solid var(--color-hair);

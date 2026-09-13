@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageHeading } from "@/components/page-heading";
 import { talks, talksByYear } from "@/content/speaking";
+import { external } from "@/lib/links";
 
 const years = talks.map((t) => t.year);
 const span = `${Math.min(...years)} and ${Math.max(...years)}`;
@@ -43,7 +44,7 @@ export default function SpeakingPage() {
                     className="grid grid-cols-1 items-baseline gap-x-4 sm:grid-cols-[minmax(0,1fr)_auto]"
                   >
                     <p className="text-[18px] leading-[1.4]">
-                      <a className="lk" href={talk.url}>
+                      <a className="lk" href={talk.url} {...external}>
                         {talk.event}
                       </a>
                       {talk.extras.map((extra) => (
@@ -51,6 +52,7 @@ export default function SpeakingPage() {
                           key={extra.label}
                           href={extra.url}
                           className="ml-[6px] font-mono text-[11px] tracking-[0.06em] text-faint hover:text-ink"
+                          {...external}
                         >
                           [{extra.label}]
                         </a>

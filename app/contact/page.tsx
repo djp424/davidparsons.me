@@ -19,7 +19,8 @@ export default function ContactPage() {
         className="mx-auto w-full max-w-[720px] px-6 pt-16 sm:px-0 sm:pt-22"
       >
         <PageHeading label="Contact" title="You know what to do!">
-          Write below and it lands in my inbox. I read everything.
+          Write below and your email app takes it from there. I read
+          everything.
         </PageHeading>
 
         <div className="pt-13">

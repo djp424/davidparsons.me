@@ -46,19 +46,23 @@ It appears on `/notes`, in `/rss.xml` and in `/sitemap.xml` automatically.
 
 ## Contact form
 
-`/contact` posts to a Server Action (`app/contact/actions.ts`) that delivers
-through [Resend](https://resend.com). Without the env vars below the form
-fails closed with a visible message pointing at the email address in
-`lib/site.ts` — it never pretends to have sent.
+`/contact` needs no API key, no account and no environment variables. It
+validates in the browser, then hands the message to the visitor's own email
+app through a prefilled `mailto:` link — subject and body already written,
+addressed to `site.email` in `lib/site.ts`. They press send in their mail
+client and it arrives from their real address, so replying just works.
 
-Copy `.env.example` to `.env.local` and fill in:
+The tradeoff is that delivery depends on the visitor having a mail app set up,
+and a message is only sent if they press send there. Nothing is stored or sent
+server-side. Without JavaScript the form is replaced by the plain address.
 
-- `RESEND_API_KEY`
-- `CONTACT_FROM` — an address on a domain verified in Resend
-- `CONTACT_TO` — optional, defaults to `site.email`
+To change where messages go, edit `email` in `lib/site.ts` — that is the only
+place it appears.
 
-Protections: a honeypot field, one submission per IP per 30s, five per hour.
-The rate limit is in-memory, so it is per-instance and resets on deploy.
+If you ever want true server-side delivery — the message captured whether or
+not the visitor has a mail client — that needs a credential of some kind
+(a [Resend](https://resend.com) API key, or SMTP details). There is no way
+around that; a server cannot send mail as nobody.
 
 ## Redirects from the old site
 
