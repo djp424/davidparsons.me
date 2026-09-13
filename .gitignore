@@ -43,3 +43,6 @@ next-env.d.ts
 # Design canvas build output (re-seeded from the .dc.html working files)
 design/davidparsons-me-directions.html
 !.env.example
+
+# Athlete design canvas build output (re-seeded from the .dc.html working files)
+design/athlete/athlete-page-directions.html

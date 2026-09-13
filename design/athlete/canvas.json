@@ -1,0 +1,45 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html",              "title": "Landing",        "x": 0,    "y": 0, "w": 1280, "h": 1900, "page": "page-1" },
+    { "file": "AlpenglowRaces.dc.html",    "title": "Race results",   "x": 1400, "y": 0, "w": 1280, "h": 2260, "page": "page-1" },
+    { "file": "AlpenglowTraining.dc.html", "title": "Training & gear","x": 2800, "y": 0, "w": 1280, "h": 1720, "page": "page-1" },
+
+    { "file": "ContourLanding.dc.html",    "title": "B · Landing",        "x": 0,    "y": 0,    "w": 1280, "h": 1720, "page": "page-2" },
+    { "file": "ContourRaces.dc.html",      "title": "B · Race results",   "x": 1400, "y": 0,    "w": 1280, "h": 2090, "page": "page-2" },
+    { "file": "ContourTraining.dc.html",   "title": "B · Training & gear","x": 2800, "y": 0,    "w": 1280, "h": 1560, "page": "page-2" },
+    { "file": "SummitLanding.dc.html",     "title": "C · Landing",        "x": 0,    "y": 2250, "w": 1280, "h": 1600, "page": "page-2" },
+    { "file": "SummitRaces.dc.html",       "title": "C · Race results",   "x": 1400, "y": 2250, "w": 1280, "h": 1900, "page": "page-2" },
+    { "file": "SummitTraining.dc.html",    "title": "C · Training & gear","x": 2800, "y": 2250, "w": 1280, "h": 1640, "page": "page-2" }
+  ],
+  "annotations": [
+    {
+      "id": "chosen",
+      "page": "page-1",
+      "x": -640, "y": 40, "w": 520,
+      "text": "CHOSEN — ALPENGLOW\n\nNight granite (#0E1012), one alpenglow accent (#FF6B3D) used only for sport marks, podium placings and hover. Bebas Neue set huge over Barlow, IBM Plex Mono for every number.\n\nRace results are a dense eight-column table — everything visible at a glance, which is what a tracker wants.\n\nNav stays the same four items sitewide — Notes / Speaking / Athlete / Contact — so there is never a dead end. Only the skin changes at /athlete.\n\nRaces, times and placings are invented samples. The Strava panel is sample data until the API app exists."
+    },
+    {
+      "id": "note-photos",
+      "page": "page-1",
+      "x": 4200, "y": 40, "w": 420,
+      "text": "PHOTOS\n\nDashed boxes mark the slots. This direction leans hardest on the hero.\n\n• 1 hero — 2400×1200 landscape\n• 3 action shots — 1200×900, one each for skimo, trail, climbing\n• optional per-race thumbnails — 400×300\n\nUntil they arrive the hero is a drawn ridge silhouette, which holds up on its own."
+    },
+    {
+      "id": "note-strava",
+      "page": "page-1",
+      "x": 4200, "y": 560, "w": 420,
+      "text": "STRAVA\n\nThe \"This week\" panel is sample data. Real activities need a Strava API application and a server-side refresh-token exchange — access tokens expire every six hours, so a static token won't hold.\n\nBuilt as one swappable block so nothing else changes when it gets wired."
+    },
+    {
+      "id": "not-chosen",
+      "page": "page-2",
+      "x": -640, "y": 40, "w": 520,
+      "text": "NOT CHOSEN\n\nB — Contour: warm sandstone, pine and rust, contour lines behind the mastheads, race ledger with per-row elevation sparklines.\n\nC — Summit Log: the existing paper/ink system one degree warmer with a single rust accent, reusing the /speaking row shape.\n\nKept for reference — the sparkline idea from B and the year-grouped list from C are both easy to graft onto Alpenglow later."
+    }
+  ],
+  "launch": { "view": "canvas", "page": "page-1" },
+  "pages": [
+    { "id": "page-1", "name": "Chosen — Alpenglow" },
+    { "id": "page-2", "name": "Not chosen" }
+  ]
+}

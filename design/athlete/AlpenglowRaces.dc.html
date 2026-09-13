@@ -1,0 +1,282 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #0E1012; }
+    a { color: #F4F2EE; text-decoration: none; }
+    a:hover { color: #FF6B3D; }
+    .disp { font-family: 'Bebas Neue', Impact, 'Haettenschweiler', sans-serif; font-weight: 400; letter-spacing: 0.015em; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+    .lbl { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #7D858A; }
+    .row:hover { background: #191E22; }
+  </style>
+</helmet>
+<div style="width: 1280px; min-height: 2260px; background: #0E1012; font-family: Barlow, 'Helvetica Neue', sans-serif; color: #F4F2EE; display: flex; flex-direction: column;">
+  <header style="display: flex; justify-content: space-between; align-items: center; gap: 40px; padding: 26px 80px; border-bottom: 1px solid #262C30;">
+    <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #F4F2EE;">David Parsons</a>
+    <nav style="display: flex; gap: 30px;">
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Notes</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Speaking</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D; border-bottom: 1px solid #FF6B3D; padding-bottom: 3px;">Athlete</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Contact</a>
+    </nav>
+  </header>
+  <section style="padding: 62px 80px 0;">
+    <span class="lbl">The log</span>
+    <h1 class="disp" style="margin: 12px 0 0; font-size: 88px; line-height: 0.9;">Race results</h1>
+    <p style="margin: 18px 0 0; max-width: 640px; font-size: 18px; line-height: 1.6; color: #B9BFC2; text-wrap: pretty;">Every race I have finished, oldest to newest, kept mostly so I can find it later. Mid-pack is the honest word for most of it.</p>
+    <div style="display: flex; gap: 10px; margin-top: 30px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 15px; border: 1px solid #FF6B3D; color: #FF6B3D; background: rgba(255,107,61,0.13);">All</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 15px; border: 1px solid #262C30; color: #7D858A; background: transparent;">Skimo</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 15px; border: 1px solid #262C30; color: #7D858A; background: transparent;">Trail</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 15px; border: 1px solid #262C30; color: #7D858A; background: transparent;">Bike</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 15px; border: 1px solid #262C30; color: #7D858A; background: transparent;">Road</span>
+    </div>
+  </section>
+  <section style="padding: 44px 80px 64px;">
+    <div style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; padding: 0 12px 12px; border-bottom: 1px solid #262C30;">
+      <span class="lbl" style="font-size: 10px; ">Date</span>
+      <span class="lbl" style="font-size: 10px; "></span>
+      <span class="lbl" style="font-size: 10px; ">Event</span>
+      <span class="lbl" style="font-size: 10px; text-align: right;">Dist</span>
+      <span class="lbl" style="font-size: 10px; text-align: right;">Vert</span>
+      <span class="lbl" style="font-size: 10px; text-align: right;">Time</span>
+      <span class="lbl" style="font-size: 10px; text-align: right;">Place</span>
+      <span class="lbl" style="font-size: 10px; ">Note</span>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 18px; padding: 30px 12px 12px;">
+      <span class="disp" style="font-size: 40px; line-height: 1; color: #FF6B3D;">2026</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #596166;">9 races</span>
+      <span style="flex-grow: 1; height: 1px; background: #262C30;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Aug 15, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="14" r="3.2"/><circle cx="15" cy="14" r="3.2"/><path d="m5 14 3.4-6.2h4.2L15 14"/><path d="M8.4 7.8h4"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">SBT GRVL — Black</a><span class="mono" style="font-size: 11px; color: #596166;">Steamboat Springs, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">142 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">9,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">9:14:33</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">412 / 1180</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jul 11, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Silver Rush 50 Run</a><span class="mono" style="font-size: 11px; color: #596166;">Leadville, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,800 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">11:42:08</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">96 / 402</span>
+      <span class="mono" style="font-size: 11px; color: #596166;">Longest day yet</span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jun 20, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Golden Gate Dirty 30</a><span class="mono" style="font-size: 11px; color: #596166;">Golden, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 km</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,400 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">6:38:12</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">41 / 288</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">May 30, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Quad Rock 25</a><span class="mono" style="font-size: 11px; color: #596166;">Fort Collins, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">25 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">5,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">4:21:47</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">33 / 214</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Apr 4, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Power of Four Skimo</a><span class="mono" style="font-size: 11px; color: #596166;">Aspen, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">26 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">10,400 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">7:52:19</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">58 / 190</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Mar 28, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Grand Traverse</a><span class="mono" style="font-size: 11px; color: #596166;">Crested Butte → Aspen, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">40 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,800 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">11:06:44</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">71 / 200</span>
+      <span class="mono" style="font-size: 11px; color: #596166;">Team</span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Feb 21, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">COSMIC Series — Monarch</a><span class="mono" style="font-size: 11px; color: #596166;">Monarch, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">12 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">5,600 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">2:14:09</span>
+      <span class="mono" style="font-size: 12px; color: #FF6B3D; text-align: right;">12 / 64</span>
+      <span class="mono" style="font-size: 11px; color: #FF6B3D;">3rd age group</span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Feb 7, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">A-Basin Enduro</a><span class="mono" style="font-size: 11px; color: #596166;">Arapahoe Basin, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">14 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">8,100 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">3:41:52</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">19 / 71</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jan 17, 2026</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Berthoud Pass Powder Ascent</a><span class="mono" style="font-size: 11px; color: #596166;">Berthoud Pass, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">6 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">3,400 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">1:28:31</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">8 / 43</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 18px; padding: 30px 12px 12px;">
+      <span class="disp" style="font-size: 40px; line-height: 1; color: #FF6B3D;">2025</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #596166;">7 races</span>
+      <span style="flex-grow: 1; height: 1px; background: #262C30;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Dec 13, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Vail Uphill</a><span class="mono" style="font-size: 11px; color: #596166;">Vail, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">4 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">52:14</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">14 / 58</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jul 4, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="14" r="3.2"/><circle cx="15" cy="14" r="3.2"/><path d="m5 14 3.4-6.2h4.2L15 14"/><path d="M8.4 7.8h4"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Firecracker 50</a><span class="mono" style="font-size: 11px; color: #596166;">Breckenridge, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,100 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">5:48:20</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">188 / 640</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jun 14, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Leadville Heavy Half</a><span class="mono" style="font-size: 11px; color: #596166;">Leadville, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">15.5 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">3,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">2:58:41</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">52 / 470</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">May 26, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3v14"/><path d="M5 4.4h10l-2.4 3.4L15 11.2H5z"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Bolder Boulder 10K</a><span class="mono" style="font-size: 11px; color: #596166;">Boulder, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">10 km</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">340 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">41:18</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">AA wave</span>
+      <span class="mono" style="font-size: 11px; color: #596166;">PR</span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Mar 15, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Wasatch Powderkeg</a><span class="mono" style="font-size: 11px; color: #596166;">Brighton, UT</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">11 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">5,900 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">2:51:33</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">34 / 96</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Feb 8, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="14" r="3.2"/><circle cx="15" cy="14" r="3.2"/><path d="m5 14 3.4-6.2h4.2L15 14"/><path d="M8.4 7.8h4"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Old Man Winter Rally</a><span class="mono" style="font-size: 11px; color: #596166;">Lyons, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 km</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,900 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">2:31:09</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">61 / 340</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jan 25, 2025</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Breck Ascent Series #3</a><span class="mono" style="font-size: 11px; color: #596166;">Breckenridge, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">5 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,800 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">1:04:52</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">9 / 37</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div style="display: flex; align-items: baseline; gap: 18px; padding: 30px 12px 12px;">
+      <span class="disp" style="font-size: 40px; line-height: 1; color: #FF6B3D;">2024</span>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #596166;">4 races</span>
+      <span style="flex-grow: 1; height: 1px; background: #262C30;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Sep 7, 2024</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Pikes Peak Ascent</a><span class="mono" style="font-size: 11px; color: #596166;">Manitou Springs, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">13.3 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,800 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">3:44:16</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">211 / 1800</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Jun 1, 2024</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Golden Gate Dirty 30</a><span class="mono" style="font-size: 11px; color: #596166;">Golden, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 km</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,400 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">7:12:55</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">88 / 301</span>
+      <span class="mono" style="font-size: 11px; color: #596166;">First 50k</span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Mar 9, 2024</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">COSMIC Series — A-Basin</a><span class="mono" style="font-size: 11px; color: #596166;">Arapahoe Basin, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">9 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">4,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">2:32:47</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">41 / 68</span>
+      <span class="mono" style="font-size: 11px; color: #596166;"></span>
+    </div>
+    <div class="row" style="display: grid; grid-template-columns: 104px 26px minmax(0, 1fr) 84px 92px 96px 100px 96px; gap: 18px; align-items: center; padding: 14px 12px; border-top: 1px solid #262C30;">
+      <span class="mono" style="font-size: 12px; color: #596166;">Feb 3, 2024</span>
+      <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+      <span style="display: flex; flex-direction: column; gap: 2px;"><a href="#" style="font-size: 17px; color: #F4F2EE;">Vail Uphill</a><span class="mono" style="font-size: 11px; color: #596166;">Vail, CO</span></span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">4 mi</span>
+      <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,200 ft</span>
+      <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">1:06:38</span>
+      <span class="mono" style="font-size: 12px; color: #7D858A; text-align: right;">38 / 52</span>
+      <span class="mono" style="font-size: 11px; color: #596166;">First skimo race</span>
+    </div>
+    <div style="border-top: 1px solid #262C30;"></div>
+  </section>
+  <footer style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px 80px; border-top: 1px solid #262C30;">
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #596166;">Boulder, Colorado</span>
+    <div style="display: flex; gap: 26px;">
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Strava</a>
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Mountain Project</a>
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Back to the writing &rarr;</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>

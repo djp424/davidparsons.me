@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <style>
+    body { margin: 0; background: #0E1012; }
+    a { color: #F4F2EE; text-decoration: none; }
+    a:hover { color: #FF6B3D; }
+    .disp { font-family: 'Bebas Neue', Impact, 'Haettenschweiler', sans-serif; font-weight: 400; letter-spacing: 0.015em; }
+    .mono { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+    .lbl { font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #7D858A; }
+    .row:hover { background: #191E22; }
+  </style>
+</helmet>
+<div style="width: 1280px; min-height: 1900px; background: #0E1012; font-family: Barlow, 'Helvetica Neue', sans-serif; color: #F4F2EE; display: flex; flex-direction: column;">
+  <header style="display: flex; justify-content: space-between; align-items: center; gap: 40px; padding: 26px 80px; border-bottom: 1px solid #262C30;">
+    <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #F4F2EE;">David Parsons</a>
+    <nav style="display: flex; gap: 30px;">
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Notes</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Speaking</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D; border-bottom: 1px solid #FF6B3D; padding-bottom: 3px;">Athlete</a>
+      <a href="#" class="mono" style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A; ">Contact</a>
+    </nav>
+  </header>
+  <section style="position: relative; width: 1280px; height: 480px; overflow: hidden;">
+    <svg viewBox="0 0 1280 480" preserveAspectRatio="none" style="position: absolute; inset: 0; width: 100%; height: 100%; display: block;" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1B1418"/><stop offset="46%" stop-color="#14161A"/><stop offset="100%" stop-color="#0E1012"/>
+        </linearGradient>
+        <radialGradient id="glow" cx="0.72" cy="0.52" r="0.5">
+          <stop offset="0%" stop-color="#FF6B3D" stop-opacity="0.30"/><stop offset="100%" stop-color="#FF6B3D" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="1280" height="480" fill="url(#sky)"/>
+      <rect width="1280" height="480" fill="url(#glow)"/>
+      <path d="M0 372 L182 250 L286 306 L438 186 L556 268 L690 156 L838 258 L968 200 L1112 288 L1280 214 L1280 480 L0 480 Z" fill="#1A2024" opacity="0.9"/>
+      <path d="M0 424 L150 344 L300 396 L470 300 L628 372 L790 292 L946 358 L1108 306 L1280 372 L1280 480 L0 480 Z" fill="#12171A"/>
+      <path d="M0 462 L220 414 L432 452 L662 400 L900 448 L1120 412 L1280 444 L1280 480 L0 480 Z" fill="#0E1012"/>
+    </svg>
+    <span class="mono" style="position: absolute; top: 22px; right: 80px; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: #596166; border: 1px dashed #262C30; padding: 5px 9px;">[ Hero photo &mdash; 2400 &times; 1200 ]</span>
+    <div style="position: absolute; left: 80px; right: 80px; bottom: 56px; display: flex; flex-direction: column; gap: 18px;">
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #FF6B3D;">Amateur &middot; Boulder, Colorado</span>
+      <h1 class="disp" style="margin: 0; font-size: 104px; line-height: 0.88; color: #F4F2EE;">Not a pro.<br>Still counting.</h1>
+      <p style="margin: 0; max-width: 620px; font-size: 18px; line-height: 1.6; color: #B9BFC2; text-wrap: pretty;">Skimo through the winter, trail races all summer, and rock whenever the Flatirons are dry. Twenty races logged since 2024 &mdash; every one of them is on this page.</p>
+    </div>
+  </section>
+  <section style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-bottom: 1px solid #262C30;">
+    <div style="padding: 30px 32px 32px;  padding-left: 80px; ">
+      <div class="disp" style="font-size: 54px; line-height: 1; color: #FF6B3D;">20</div>
+      <div class="lbl" style="margin-top: 8px;">Races</div>
+    </div>
+    <div style="padding: 30px 32px 32px; border-left: 1px solid #262C30;  ">
+      <div class="disp" style="font-size: 54px; line-height: 1; color: #FF6B3D;">3</div>
+      <div class="lbl" style="margin-top: 8px;">Seasons</div>
+    </div>
+    <div style="padding: 30px 32px 32px; border-left: 1px solid #262C30;  ">
+      <div class="disp" style="font-size: 54px; line-height: 1; color: #FF6B3D;">118,400</div>
+      <div class="lbl" style="margin-top: 8px;">Feet climbed</div>
+    </div>
+    <div style="padding: 30px 32px 32px; border-left: 1px solid #262C30;  padding-right: 80px;">
+      <div class="disp" style="font-size: 54px; line-height: 1; color: #FF6B3D;">11:42</div>
+      <div class="lbl" style="margin-top: 8px;">Longest day</div>
+    </div>
+  </section>
+  <section style="padding: 56px 80px 0;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px;">
+      <h2 class="disp" style="margin: 0; font-size: 34px; letter-spacing: 0.03em;">This week</h2>
+      <div style="display: flex; gap: 26px; align-items: baseline;">
+        <span class="mono" style="font-size: 13px; color: #B9BFC2;">41.7 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2;">7,850 ft</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2;">6h 22m</span>
+        <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D;">On Strava &rarr;</a>
+      </div>
+    </div>
+    <div style="border: 1px solid #262C30; background: #14181B; display: flex; flex-direction: column;">
+      <div class="row" style="display: grid; grid-template-columns: 52px 26px minmax(0, 1fr) 92px 96px 84px; align-items: center; gap: 18px; padding: 16px 22px; ">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #596166;">Sat</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#FF6B3D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 16px; color: #F4F2EE;">Green Mountain via Amphitheater</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">6.2 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,540 ft</span>
+        <span class="mono" style="font-size: 13px; color: #7D858A; text-align: right;">1:12:08</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 52px 26px minmax(0, 1fr) 92px 96px 84px; align-items: center; gap: 18px; padding: 16px 22px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #596166;">Thu</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#FF6B3D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 16px; color: #F4F2EE;">Marshall Mesa tempo</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">9.4 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">620 ft</span>
+        <span class="mono" style="font-size: 13px; color: #7D858A; text-align: right;">1:08:44</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 52px 26px minmax(0, 1fr) 92px 96px 84px; align-items: center; gap: 18px; padding: 16px 22px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #596166;">Wed</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#FF6B3D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 16px; color: #F4F2EE;">Flagstaff repeats</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">18.1 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">2,100 ft</span>
+        <span class="mono" style="font-size: 13px; color: #7D858A; text-align: right;">1:34:02</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 52px 26px minmax(0, 1fr) 92px 96px 84px; align-items: center; gap: 18px; padding: 16px 22px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #596166;">Tue</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#FF6B3D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.2c3 0 5 2.4 5 5.4v3.6c0 2.6-2.2 4.6-5 4.6s-5-2-5-4.6V8.6c0-3 2-5.4 5-5.4Z"/><path d="M10 3.2v6"/></svg>
+        <span style="font-size: 16px; color: #F4F2EE;">Eldo approach + Bastille Crack</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">1.8 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">1,100 ft</span>
+        <span class="mono" style="font-size: 13px; color: #7D858A; text-align: right;">2:27:00</span>
+      </div>
+    </div>
+    <p class="mono" style="margin: 10px 0 0; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: #596166;">[ Sample data &mdash; live Strava feed to be wired ]</p>
+  </section>
+  <section style="padding: 52px 80px 0;">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 18px;">
+      <h2 class="disp" style="margin: 0; font-size: 34px; letter-spacing: 0.03em;">Latest results</h2>
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D;">All 20 races &rarr;</a>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <div class="row" style="display: grid; grid-template-columns: 108px 26px minmax(0, 1fr) 92px 96px 100px 104px; align-items: center; gap: 18px; padding: 15px 12px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 12px; color: #596166;">Aug 15, 2026</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="14" r="3.2"/><circle cx="15" cy="14" r="3.2"/><path d="m5 14 3.4-6.2h4.2L15 14"/><path d="M8.4 7.8h4"/></svg>
+        <span style="font-size: 17px; color: #F4F2EE;">SBT GRVL — Black</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">142 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">9,200 ft</span>
+        <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">9:14:33</span>
+        <span class="mono" style="font-size: 12px; text-align: right; color: #7D858A;">412 / 1180</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 108px 26px minmax(0, 1fr) 92px 96px 100px 104px; align-items: center; gap: 18px; padding: 15px 12px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 12px; color: #596166;">Jul 11, 2026</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 17px; color: #F4F2EE;">Silver Rush 50 Run</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,800 ft</span>
+        <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">11:42:08</span>
+        <span class="mono" style="font-size: 12px; text-align: right; color: #7D858A;">96 / 402</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 108px 26px minmax(0, 1fr) 92px 96px 100px 104px; align-items: center; gap: 18px; padding: 15px 12px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 12px; color: #596166;">Jun 20, 2026</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 17px; color: #F4F2EE;">Golden Gate Dirty 30</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">50 km</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">7,400 ft</span>
+        <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">6:38:12</span>
+        <span class="mono" style="font-size: 12px; text-align: right; color: #7D858A;">41 / 288</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 108px 26px minmax(0, 1fr) 92px 96px 100px 104px; align-items: center; gap: 18px; padding: 15px 12px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 12px; color: #596166;">May 30, 2026</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h16"/><path d="m4 16 4.5-8.5 3 5 2-3.2L18 16"/></svg>
+        <span style="font-size: 17px; color: #F4F2EE;">Quad Rock 25</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">25 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">5,200 ft</span>
+        <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">4:21:47</span>
+        <span class="mono" style="font-size: 12px; text-align: right; color: #7D858A;">33 / 214</span>
+      </div>
+      <div class="row" style="display: grid; grid-template-columns: 108px 26px minmax(0, 1fr) 92px 96px 100px 104px; align-items: center; gap: 18px; padding: 15px 12px; border-top: 1px solid #262C30;">
+        <span class="mono" style="font-size: 12px; color: #596166;">Apr 4, 2026</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" stroke="#7D858A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 16.5h14"/><path d="M6.5 16.2 9.4 4.6"/><path d="M13.5 16.2 10.6 4.6"/><path d="M5.2 10.6h9.6"/></svg>
+        <span style="font-size: 17px; color: #F4F2EE;">Power of Four Skimo</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">26 mi</span>
+        <span class="mono" style="font-size: 13px; color: #B9BFC2; text-align: right;">10,400 ft</span>
+        <span class="mono" style="font-size: 13px; color: #F4F2EE; text-align: right;">7:52:19</span>
+        <span class="mono" style="font-size: 12px; text-align: right; color: #7D858A;">58 / 190</span>
+      </div>
+      <div style="border-top: 1px solid #262C30;"></div>
+    </div>
+  </section>
+  <section style="padding: 52px 80px 60px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px;">
+    <div style="background: #14181B; border: 1px solid #262C30; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="lbl">Rock</span>
+      <h3 class="disp" style="margin: 0; font-size: 28px; letter-spacing: 0.03em; color: #F4F2EE;">Climbing</h3>
+      <div style="display: flex; flex-direction: column; gap: 7px;">
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Hardest redpoint</span><span class="mono" style="color: #7D858A; white-space: nowrap;">5.12c</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Hardest boulder</span><span class="mono" style="color: #7D858A; white-space: nowrap;">V7</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Hardest trad lead</span><span class="mono" style="color: #7D858A; white-space: nowrap;">5.11a</span></div>
+      </div>
+      <a href="#" class="mono" style="margin-top: 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D;">Ticklist &rarr;</a>
+    </div>
+    <div style="background: #14181B; border: 1px solid #262C30; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="lbl">Kit</span>
+      <h3 class="disp" style="margin: 0; font-size: 28px; letter-spacing: 0.03em; color: #F4F2EE;">What I race on</h3>
+      <div style="display: flex; flex-direction: column; gap: 7px;">
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Skis</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Ski Trab Gara Aero World Cup</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Boots</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Scarpa Alien 1.0</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Skins</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Pomoca Race Pro</span></div>
+      </div>
+      <a href="#" class="mono" style="margin-top: 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D;">Full setup &rarr;</a>
+    </div>
+    <div style="background: #14181B; border: 1px solid #262C30; padding: 26px 24px 24px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="lbl">Ahead</span>
+      <h3 class="disp" style="margin: 0; font-size: 28px; letter-spacing: 0.03em; color: #F4F2EE;">What's next</h3>
+      <div style="display: flex; flex-direction: column; gap: 7px;">
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Vail Uphill</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Dec 2026</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>COSMIC Series</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Jan–Mar 2027</span></div>
+        <div style="display: flex; justify-content: space-between; gap: 14px; font-size: 14px; color: #B9BFC2;"><span>Grand Traverse</span><span class="mono" style="color: #7D858A; white-space: nowrap;">Mar 2027</span></div>
+      </div>
+      <a href="#" class="mono" style="margin-top: 4px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #FF6B3D;">Season goals &rarr;</a>
+    </div>
+  </section>
+  <footer style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 30px 80px; border-top: 1px solid #262C30;">
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #596166;">Boulder, Colorado</span>
+    <div style="display: flex; gap: 26px;">
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Strava</a>
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Mountain Project</a>
+      <a href="#" class="mono" style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: #7D858A;">Back to the writing &rarr;</a>
+    </div>
+  </footer>
+</div>
+</x-dc>
+</body>
+</html>
