@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="#17191a"/>
+  <g fill="none" stroke="#fafaf8" stroke-width="7" stroke-linecap="butt" stroke-linejoin="miter">
+    <!-- Both letters span y=10 to y=54 at their outer edges. The D's baseline is
+         a horizontal stroke (centreline 50.5, +3.5 half-width); the P's stem ends
+         in a butt cap, so its centreline runs all the way to 54. -->
+    <path d="M11.5 50.5 V13.5 H18 A7.5 18.5 0 0 1 18 50.5 Z"/>
+    <path d="M38.5 54 V13.5 H45 A7.5 8.5 0 0 1 45 30.5 H38.5"/>
+  </g>
+</svg>
