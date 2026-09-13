@@ -10,12 +10,38 @@
   --color-rule: #e4e4e0;
   --color-hair: #c6c8c3;
 
+  /* The athlete section runs its own palette — night granite, one accent.
+     Prefixed so it can never collide with the paper/ink tokens above. */
+  --color-alp-page: #0e1012;
+  --color-alp-panel: #14181b;
+  --color-alp-raised: #191e22;
+  --color-alp-hair: #262c30;
+  --color-alp-ink: #f4f2ee;
+  --color-alp-body: #b9bfc2;
+  --color-alp-muted: #7d858a;
+  --color-alp-faint: #596166;
+  --color-alp-accent: #ff6b3d;
+
   --font-serif: var(--font-newsreader), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-bebas), Impact, Haettenschweiler, sans-serif;
+  --font-sans: var(--font-barlow), "Helvetica Neue", Helvetica, sans-serif;
 }
 
 :root {
   color-scheme: light;
+}
+
+/* The section owns the whole viewport, not just its own box, so the paper
+   ground never shows through in overscroll or below short pages. */
+body:has(.alpenglow) {
+  background: var(--color-alp-page);
+  color: var(--color-alp-ink);
+  color-scheme: dark;
+}
+
+body:has(.alpenglow) :focus-visible {
+  outline-color: var(--color-alp-accent);
 }
 
 html {

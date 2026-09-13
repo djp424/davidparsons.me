@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Newsreader, IBM_Plex_Mono } from "next/font/google";
+import { Newsreader, IBM_Plex_Mono, Bebas_Neue, Barlow } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -16,6 +16,24 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500"],
   variable: "--font-plex-mono",
   display: "swap",
+});
+
+// Only /athlete uses these two, so don't make every writing page pay to
+// preload them.
+const bebas = Bebas_Neue({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-bebas",
+  display: "swap",
+  preload: false,
+});
+
+const barlow = Barlow({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-barlow",
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -44,7 +62,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${plexMono.variable}`}
+      className={`${newsreader.variable} ${plexMono.variable} ${bebas.variable} ${barlow.variable}`}
     >
       <body className="flex min-h-dvh flex-col">
         <a

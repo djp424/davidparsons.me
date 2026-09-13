@@ -16,6 +16,10 @@ npm run dev
 | `app/` | Routes. `app/[slug]/` renders posts at the top level so the old WordPress URLs still work. |
 | `content/notes/*.mdx` | The posts, with frontmatter. Filename is the URL slug. |
 | `content/speaking.ts` | Every talk, with its venue link and any video/case-study links. |
+| `content/races.ts` | The race log, plus `racesByYear()` and `raceStats()`. |
+| `content/athlete.ts` | Climbing, gear, objectives, and the sample Strava week. |
+| `app/athlete/` | The athlete section — its own palette and chrome, three routes. |
+| `components/athlete/` | Chrome and rows for that section only; the writing side is untouched. |
 | `lib/notes.ts` | Reads and sorts the MDX files. |
 | `lib/site.ts` | Name, URL, email, nav and social links — one place to change them. |
 | `components/mdx-components.tsx` | Prose styling for post bodies. |
@@ -26,6 +30,17 @@ npm run dev
 Colours and fonts live in one `@theme` block at the top of `app/globals.css`.
 The design is a single warm paper ground with one ink colour and no accent —
 links are a hairline that firms up on hover (`.lk`), not a colour change.
+
+`/athlete` is the deliberate exception. It runs a second palette in the same
+`@theme` block, prefixed `--color-alp-*`: night granite with one alpenglow
+accent, Bebas Neue over Barlow instead of Newsreader. It is a different room,
+not a different house — the nav carries the same four items everywhere so
+nobody lands there and hits a dead end.
+
+The ground has to cover the whole viewport, and `app/athlete/layout.tsx` is a
+child of `<body>` rather than the body itself, so `globals.css` repaints the
+body from `body:has(.alpenglow)`. Change the wrapper class and that selector
+together or the paper ground shows through in overscroll.
 
 ## Adding a post
 

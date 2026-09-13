@@ -3,7 +3,15 @@ import { allNotes } from "@/lib/notes";
 import { site } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages = ["", "/notes", "/speaking", "/contact"].map((path) => ({
+  const pages = [
+    "",
+    "/notes",
+    "/speaking",
+    "/athlete",
+    "/athlete/races",
+    "/athlete/training",
+    "/contact",
+  ].map((path) => ({
     url: `${site.url}${path}`,
     changeFrequency: "yearly" as const,
     priority: path === "" ? 1 : 0.8,
