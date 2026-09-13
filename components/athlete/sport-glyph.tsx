@@ -1,16 +1,43 @@
+import type { ReactNode } from "react";
 import type { Sport } from "@/content/races";
 
 /**
  * Stroke-based sport marks on a 20px grid — drawn rather than set in a font
- * so they scale and pick up currentColor.
+ * so they scale and pick up currentColor. Keep them to a handful of strokes:
+ * they render at 18px in the race table, where detail turns to mush.
  */
-const paths: Record<Sport, string> = {
-  Skimo: "M3 16.5h14 M6.5 16.2 9.4 4.6 M13.5 16.2 10.6 4.6 M5.2 10.6h9.6",
-  Trail: "M2 16h16 M4 16l4.5-8.5 3 5 2-3.2L18 16",
-  Road: "M5 3v14 M5 4.4h10l-2.4 3.4L15 11.2H5z",
-  Bike: "M5 14 8.4 7.8h4.2L15 14 M8.4 7.8h4",
-  Climb:
-    "M10 3.2c3 0 5 2.4 5 5.4v3.6c0 2.6-2.2 4.6-5 4.6s-5-2-5-4.6V8.6c0-3 2-5.4 5-5.4Z M10 3.2v6",
+const marks: Record<Sport, ReactNode> = {
+  // A pair of skis side-on. The upturned tip is the only thing that says
+  // "ski" at this size, so it gets a real hook and everything else goes.
+  Skimo: (
+    <>
+      <path d="M2.4 8.2h8.9c3 0 4.8-1.2 5.9-3.6" />
+      <path d="M2.4 14h8.9c3 0 4.8-1.2 5.9-3.6" />
+    </>
+  ),
+  // A runner mid-stride. Six strokes, nothing behind it.
+  Trail: (
+    <>
+      <circle cx="11.9" cy="3.9" r="1.8" />
+      <path d="M11.1 6.9 8.7 11.3l3.1 2.1-.6 4" />
+      <path d="M8.7 11.3 5.1 12.6 3.9 16.4" />
+      <path d="m9.9 8.2 3.7 1.5 1.9-2" />
+      <path d="M10.4 7.7 7.1 6.9" />
+    </>
+  ),
+  // A finish flag.
+  Road: <path d="M5 3v14 M5 4.4h10l-2.4 3.4L15 11.2H5z" />,
+  Bike: (
+    <>
+      <circle cx="5" cy="14" r="3.2" />
+      <circle cx="15" cy="14" r="3.2" />
+      <path d="M5 14 8.4 7.8h4.2L15 14 M8.4 7.8h4" />
+    </>
+  ),
+  // A carabiner.
+  Climb: (
+    <path d="M10 3.2c3 0 5 2.4 5 5.4v3.6c0 2.6-2.2 4.6-5 4.6s-5-2-5-4.6V8.6c0-3 2-5.4 5-5.4Z M10 3.2v6" />
+  ),
 };
 
 export function SportGlyph({
@@ -33,13 +60,7 @@ export function SportGlyph({
       role="img"
       aria-label={sport}
     >
-      <path d={paths[sport]} />
-      {sport === "Bike" ? (
-        <>
-          <circle cx="5" cy="14" r="3.2" />
-          <circle cx="15" cy="14" r="3.2" />
-        </>
-      ) : null}
+      {marks[sport]}
     </svg>
   );
 }

@@ -69,7 +69,7 @@ export function RaceRow({ race }: { race: Race }) {
       </span>
 
       <span className="text-alp-muted">
-        <SportGlyph sport={race.sport} />
+        <SportGlyph sport={race.sport} size={20} />
       </span>
 
       <span className="flex flex-col gap-[3px]">
