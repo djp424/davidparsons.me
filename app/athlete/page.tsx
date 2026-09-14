@@ -7,16 +7,18 @@ import {
 import { StatBand } from "@/components/athlete/stat-band";
 import { StravaRecent } from "@/components/athlete/strava-recent";
 import { RaceRow } from "@/components/athlete/race-row";
-import { races, raceStats } from "@/content/races";
+import { raceStats } from "@/content/races";
+import { getRaces } from "@/lib/strava";
 import { climbing, gear, objectives } from "@/content/athlete";
 
-const stats = raceStats();
-
-export const metadata: Metadata = {
-  title: "Athlete",
-  description: `Multisport athlete out of Boulder, Colorado — skimo, trail, bike and rock. Every race logged, ${stats.count} of them so far.`,
-  alternates: { canonical: "/athlete" },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const stats = raceStats(await getRaces());
+  return {
+    title: "Athlete",
+    description: `Multisport athlete out of Boulder, Colorado — skimo, trail, bike, road and rock. Every race logged, ${stats.count} of them so far.`,
+    alternates: { canonical: "/athlete" },
+  };
+}
 
 /**
  * The Strava band below is live, so this page is regenerated on a schedule
@@ -109,7 +111,10 @@ function Card({
   );
 }
 
-export default function AthletePage() {
+export default async function AthletePage() {
+  const races = await getRaces();
+  const stats = raceStats(races);
+
   return (
     <>
       <AlpenglowHeader current="/athlete" />
@@ -124,14 +129,14 @@ export default function AthletePage() {
               Multisport athlete · Boulder, Colorado
             </span>
             <h1 className="font-display text-[52px] leading-[0.88] text-alp-ink sm:text-[88px] lg:text-[104px]">
-              Four sports.
+              Snow, dirt, road.
               <br />
               Still counting.
             </h1>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-alp-body text-pretty sm:text-[18px]">
-              Skimo through the winter, trail races all summer, the bike in
-              between, and rock whenever the Flatirons are dry. Every race I
-              finish gets logged here — {stats.count} of them so far.
+              Skimo through the winter, trail and road races all summer, the
+              bike in between, and rock whenever the Flatirons are dry. Every
+              race I finish gets logged here — {stats.count} of them so far.
             </p>
           </div>
         </section>

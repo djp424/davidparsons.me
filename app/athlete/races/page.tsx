@@ -5,17 +5,21 @@ import {
 } from "@/components/athlete/athlete-chrome";
 import { RaceRow, RaceTableHead } from "@/components/athlete/race-row";
 import { racesByYear, raceStats } from "@/content/races";
+import { getRaces } from "@/lib/strava";
 
-const stats = raceStats();
+export async function generateMetadata(): Promise<Metadata> {
+  const stats = raceStats(await getRaces());
+  return {
+    title: "Race results",
+    description: `Every race David Parsons has finished — ${stats.count} of them, ${stats.span}, across skimo, trail, road and triathlon.`,
+    alternates: { canonical: "/athlete/races" },
+  };
+}
 
-export const metadata: Metadata = {
-  title: "Race results",
-  description: `Every race David Parsons has finished — ${stats.count} of them, ${stats.span}, across skimo and mountain trail running.`,
-  alternates: { canonical: "/athlete/races" },
-};
-
-export default function RacesPage() {
-  const groups = racesByYear();
+export default async function RacesPage() {
+  const races = await getRaces();
+  const stats = raceStats(races);
+  const groups = racesByYear(races);
 
   return (
     <>
@@ -45,7 +49,8 @@ export default function RacesPage() {
                   {group.year}
                 </h2>
                 <span className="font-mono text-[11px] tracking-[0.12em] text-alp-faint uppercase">
-                  {group.races.length} races
+                  {group.races.length}{" "}
+                  {group.races.length === 1 ? "race" : "races"}
                 </span>
                 <span className="h-px flex-grow bg-alp-hair" />
               </div>

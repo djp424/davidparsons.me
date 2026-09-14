@@ -1,6 +1,13 @@
 import "server-only";
 
-import type { GlyphSport } from "@/content/races";
+import {
+  sortRaces,
+  type GlyphSport,
+  type Placing,
+  type Race,
+  type RaceLink,
+} from "@/content/races";
+import raceDetails from "@/content/race-details.json";
 
 /**
  * The live Strava feed behind the "recent activities" band on /athlete, and
@@ -148,6 +155,8 @@ type RawActivity = {
   moving_time?: number;
   elapsed_time?: number;
   start_date_local?: string;
+  /** 1 on a run and 11 on a ride mean "race". Absent on most sports. */
+  workout_type?: number | null;
   private?: boolean;
   visibility?: string;
 };
@@ -527,4 +536,148 @@ function splitBySport(logged: RawActivity[]): SportSplit[] {
       count,
       time: hoursAndMinutes(seconds),
     }));
+}
+
+
+/* -------------------------------------------------------------------------
+   Races
+   ---------------------------------------------------------------------- */
+
+/**
+ * What content/race-details.json holds for one activity — everything Strava
+ * cannot know, plus overrides for the things it reports differently from the
+ * official results.
+ */
+type RaceDetail = {
+  date?: string;
+  event?: string;
+  location?: string;
+  sport?: GlyphSport;
+  distance?: string;
+  vert?: string;
+  time?: string;
+  placing?: Placing;
+  note?: string;
+  links?: RaceLink[];
+  /** Overrides Strava: true forces a race in, false forces one out. */
+  race?: boolean;
+};
+
+const DETAILS = raceDetails as unknown as Record<string, RaceDetail>;
+
+/**
+ * Strava's `workout_type` values that mean "this was a race": 1 on a run,
+ * 11 on a ride.
+ *
+ * There is no equivalent for ski touring, which is why the detail file has a
+ * `race` flag at all — a skimo race cannot be marked as one on Strava, so
+ * every one of them would otherwise be invisible here.
+ */
+const RACE_WORKOUT_TYPES = new Set([1, 11]);
+
+/** Pages of history to walk when rebuilding the race log. */
+const MAX_RACE_PAGES = 12;
+
+function isRace(activity: RawActivity): boolean {
+  const detail = DETAILS[String(activity.id)];
+  if (detail?.race !== undefined) return detail.race;
+  return RACE_WORKOUT_TYPES.has(activity.workout_type ?? -1);
+}
+
+/**
+ * Every race, newest first: Strava for the date and the numbers, the detail
+ * file for the name, the placing and the links.
+ *
+ * Walks the whole history rather than a window — a race log is not a recent
+ * feed — so it shares the year total's daily cache rather than the activity
+ * band's half-hourly one.
+ *
+ * Returns null if Strava cannot be reached, which the pages fall back from
+ * using the detail file alone.
+ */
+export async function fetchRaces(): Promise<Race[] | null> {
+  const token = await accessToken();
+  if (!token) return null;
+
+  const races: Race[] = [];
+
+  for (let page = 1; page <= MAX_RACE_PAGES; page++) {
+    const batch = await readActivities(
+      `${ACTIVITIES_ENDPOINT}?per_page=${MAX_PER_PAGE}&page=${page}`,
+      token,
+      YTD_REVALIDATE_SECONDS,
+    );
+
+    // Half a history is a wrong race log, not a short one.
+    if (!batch) return null;
+
+    for (const activity of batch) {
+      if (typeof activity.id !== "number") continue;
+      if (typeof activity.start_date_local !== "string") continue;
+      if (!isRace(activity)) continue;
+
+      const detail = DETAILS[String(activity.id)] ?? {};
+      races.push({
+        date: activity.start_date_local.slice(0, 10),
+        event: detail.event ?? activity.name?.trim() ?? "Untitled",
+        sport: detail.sport ?? sportOf(activity),
+        location: detail.location,
+        distance: detail.distance ?? miles(activity.distance ?? 0),
+        vert: detail.vert ?? feet(activity.total_elevation_gain ?? 0),
+        // Official chip time when the detail file has one; Strava's elapsed
+        // time otherwise, since a race clock does not stop when you do.
+        time: detail.time ?? duration(activity.elapsed_time ?? activity.moving_time ?? 0),
+        placing: detail.placing,
+        note: detail.note,
+        links: [
+          ...(detail.links ?? []),
+          { kind: "strava" as const, url: `https://www.strava.com/activities/${activity.id}` },
+        ],
+      });
+    }
+
+    if (batch.length < MAX_PER_PAGE) break;
+  }
+
+  return sortRaces(races);
+}
+
+/**
+ * The race log as the detail file alone describes it.
+ *
+ * Only reached when Strava is unavailable during a build. It keeps the page
+ * from deploying with an empty race section, at the cost of the figures the
+ * detail file does not carry.
+ */
+export function racesFromDetailsOnly(): Race[] {
+  const races: Race[] = [];
+  for (const [id, detail] of Object.entries(DETAILS)) {
+    if (!detail?.date || detail.race === false) continue;
+    races.push({
+      date: detail.date,
+      event: detail.event ?? "Untitled",
+      sport: detail.sport ?? "Other",
+      location: detail.location,
+      distance: detail.distance,
+      vert: detail.vert,
+      time: detail.time,
+      placing: detail.placing,
+      note: detail.note,
+      links: [
+        ...(detail.links ?? []),
+        { kind: "strava" as const, url: `https://www.strava.com/activities/${id}` },
+      ],
+    });
+  }
+  return sortRaces(races);
+}
+
+/**
+ * The race log, with the detail-file fallback already applied.
+ *
+ * Both the athlete page and the results page call this; React memoises the
+ * underlying fetches for the render, so asking twice costs one walk.
+ */
+export async function getRaces(): Promise<Race[]> {
+  return (await fetchRaces()) ?? racesFromDetailsOnly();
 }

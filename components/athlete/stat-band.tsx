@@ -1,5 +1,5 @@
 import { raceStats } from "@/content/races";
-import { fetchYearVert } from "@/lib/strava";
+import { fetchYearVert, getRaces } from "@/lib/strava";
 
 /**
  * The four figures under the hero.
@@ -15,8 +15,8 @@ import { fetchYearVert } from "@/lib/strava";
  * yearly figure while showing a races-only one.
  */
 export async function StatBand() {
-  const stats = raceStats();
-  const yearVert = await fetchYearVert();
+  const [races, yearVert] = await Promise.all([getRaces(), fetchYearVert()]);
+  const stats = raceStats(races);
   const year = new Date().getFullYear();
 
   const cells = [

@@ -1,0 +1,135 @@
+{
+  "//": [
+    "Race details, keyed by Strava activity id. Everything here is what Strava",
+    "cannot know: the event's real name, where it was, how you placed, and the",
+    "links the organisers put online.",
+    "",
+    "TO ADD A RACE: open the activity on Strava, take the number off the end of",
+    "the URL, and add a block. The date, distance, vert, time and sport all come",
+    "from Strava — you only fill in what it does not have.",
+    "",
+    "  \"20147865866\": {",
+    "    \"date\": \"2026-09-12\",            // only so this file reads on its own",
+    "    \"event\": \"Rattlesnake Ramble\",   // defaults to the activity's name",
+    "    \"location\": \"Eldorado Canyon State Park, CO\",",
+    "    \"race\": true,                     // see below",
+    "    \"sport\": \"Trail\",                // overrides the mapped sport type",
+    "    \"distance\": \"4.3 mi\",            // overrides Strava's GPS figure",
+    "    \"time\": \"38:12\",                 // official chip time beats moving time",
+    "    \"placing\": { \"overall\": 40, \"field\": 114 },",
+    "    \"note\": \"Anything worth remembering\",",
+    "    \"links\": [{ \"kind\": \"results\", \"url\": \"…\" }]",
+    "  }",
+    "",
+    "\"race\" only matters when Strava disagrees. Strava flags races through",
+    "workout_type, but only for runs and rides — a skimo race cannot be flagged",
+    "at all, which is why the ski races below say \"race\": true. Set it to false",
+    "to drop something Strava flagged that was not really a race.",
+    "",
+    "Several entries below have no location yet — they were found on Strava",
+    "rather than typed out by hand, and guessing where they were is not this",
+    "file's job. Fill them in as you go."
+  ],
+
+  "20147865866": {
+    "date": "2026-09-12",
+    "event": "Rattlesnake Ramble",
+    "location": "Eldorado Canyon State Park, CO",
+    "sport": "Trail",
+    "distance": "4.3 mi",
+    "time": "38:12",
+    "placing": { "overall": 40, "field": 114 },
+    "links": [
+      { "kind": "event", "url": "https://www.rattlesnakeramble.org/" },
+      {
+        "kind": "results",
+        "url": "https://www.opensplittime.org/events/2026-rattlesnake-ramble-full-course/spread"
+      },
+      {
+        "kind": "splits",
+        "url": "https://www.opensplittime.org/efforts/2026-rattlesnake-ramble-full-course-david-parsons"
+      }
+    ]
+  },
+
+  "19758708717": {
+    "date": "2026-08-15",
+    "event": "Ed Anacker Bridger Ridge Run",
+    "location": "Bozeman, MT",
+    "race": true,
+    "sport": "Trail",
+    "distance": "19.9 mi",
+    "vert": "6,800 ft",
+    "time": "4:44:25",
+    "placing": { "overall": 34, "division": "Male 30–39", "divisionPlace": 6 },
+    "note": "9,500 ft of descent off the ridge",
+    "links": [
+      { "kind": "results", "url": "https://my.raceresult.com/415694/" },
+      { "kind": "result", "url": "https://my.raceresult.com/415694/details1?pid=41" },
+      { "kind": "photos", "url": "https://www.kurtwehde.com/Bridger-Ridge-Run-2026" },
+      {
+        "kind": "instagram",
+        "url": "https://www.instagram.com/p/DcG9AQMkV2Z/?img_index=1"
+      }
+    ]
+  },
+
+  "17476836266": {
+    "date": "2026-02-21",
+    "event": "Audi Power of Four",
+    "location": "Aspen, CO",
+    "race": true,
+    "distance": "24 mi",
+    "vert": "10,000 ft",
+    "time": "7:43:41",
+    "placing": { "division": "P4 Coed", "divisionPlace": 1, "divisionField": 13 },
+    "note": "Freaks in the Steeps, with Annie Weinmann",
+    "links": [
+      { "kind": "results", "url": "https://my.raceresult.com/369443/" },
+      { "kind": "result", "url": "https://my.raceresult.com/369443/details?pid=76" }
+    ]
+  },
+
+  "18909329677": {
+    "date": "2026-06-13",
+    "event": "Boulder 70.3",
+    "location": "Boulder, CO",
+    "race": true,
+    "sport": "Other",
+    "distance": "70.9 mi",
+    "vert": "3,228 ft",
+    "time": "6:36:16",
+    "note": "Swim, bike and run logged as five separate activities"
+  },
+
+  "17906305994": { "date": "2026-03-29", "event": "The Grand Traverse", "race": true },
+  "17735275833": { "date": "2026-03-15", "event": "Tellurando", "race": true },
+  "17567957560": { "date": "2026-03-01", "event": "Granby Ranch Skimo Race", "race": true },
+  "17243367755": { "date": "2026-01-31", "event": "WP 10k Vert", "race": true },
+  "17253072626": { "date": "2026-02-01", "event": "Old Man Winter 10k", "race": true },
+  "16742728155": {
+    "date": "2025-12-14",
+    "event": "Wolf Creek Race",
+    "race": true,
+    "note": "Cut off"
+  },
+  "15971606087": { "date": "2025-09-28", "event": "First Marathon", "race": true },
+  "10614124928": { "date": "2024-01-23", "event": "Rise N' Shine Rando Race #6", "race": true },
+  "10405169364": { "date": "2023-12-19", "event": "Rise and Shine A-Basin Race", "race": true },
+  "10973564237": { "date": "2024-03-16", "event": "Tellurando", "race": true },
+  "8736897153": {
+    "date": "2023-03-18",
+    "event": "Tellurando",
+    "race": true,
+    "note": "First skimo race"
+  },
+  "10077724935": { "date": "2023-10-21", "event": "Haunted 10k", "race": true },
+  "9012124245": { "date": "2023-05-04", "event": "5K Race", "race": true },
+  "7198059090": { "date": "2022-05-24", "event": "Avery 5K", "race": true },
+
+  "18648106934": { "date": "2026-05-25", "event": "BOLDERBoulder", "location": "Boulder, CO", "sport": "Road" },
+  "14600118433": { "date": "2025-05-26", "event": "BOLDERBoulder", "location": "Boulder, CO", "race": true, "sport": "Road" },
+  "11510447655": { "date": "2024-05-27", "event": "BOLDERBoulder", "location": "Boulder, CO", "sport": "Road" },
+  "9163176346": { "date": "2023-05-29", "event": "BOLDERBoulder", "location": "Boulder, CO", "race": true, "sport": "Road" },
+  "7226897955": { "date": "2022-05-30", "event": "BOLDERBoulder", "location": "Boulder, CO", "race": true, "sport": "Road" }
+}

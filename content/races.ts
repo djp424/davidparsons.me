@@ -1,29 +1,9 @@
 /**
- * The race log.
+ * Race types, formatting and the helpers the race table is built from.
  *
- * TO ADD A RACE: copy the block below to anywhere in `races` and edit it.
- * Order does not matter — the list sorts itself by date. Everything except
- * `date`, `event`, `sport` and `location` is optional, so a race with only
- * half its details still lists cleanly.
- *
- *   {
- *     date: "2027-03-27",              // ISO. The year and the pretty date
- *     event: "Grand Traverse",         // are both derived from this.
- *     sport: "Skimo",                  // Skimo | Trail | Road | Bike | Climb
- *     location: "Crested Butte, CO",
- *     distance: "40 mi",
- *     vert: "7,800 ft",
- *     time: "11:06:44",
- *     placing: { overall: 71, field: 200 },
- *     note: "Team, with Annie Weinmann",
- *     links: [
- *       { kind: "results", url: "…" },
- *       { kind: "strava", url: "…" },
- *     ],
- *   },
- *
- * A top-three finish overall or in a division is highlighted automatically —
- * there is no flag to remember to set.
+ * The log itself is no longer written here — it comes from Strava, merged
+ * with content/race-details.json. See `fetchRaces` in lib/strava.ts and the
+ * notes at the top of that JSON file for how to add a race.
  */
 
 export type Sport = "Skimo" | "Trail" | "Road" | "Bike" | "Climb";
@@ -81,8 +61,9 @@ export type Race = {
   /** ISO. The single source of truth for ordering, grouping and display. */
   date: string;
   event: string;
-  sport: Sport;
-  location: string;
+  sport: GlyphSport;
+  /** Optional: Strava does not report it, so a Strava-found race may lack it. */
+  location?: string;
   distance?: string;
   vert?: string;
   time?: string;
@@ -91,83 +72,10 @@ export type Race = {
   links?: RaceLink[];
 };
 
-const log: Race[] = [
-  {
-    date: "2026-09-12",
-    event: "Rattlesnake Ramble",
-    sport: "Trail",
-    location: "Eldorado Canyon State Park, CO",
-    distance: "4.3 mi",
-    time: "38:12",
-    placing: { overall: 40, field: 114 },
-    links: [
-      { kind: "event", url: "https://www.rattlesnakeramble.org/" },
-      {
-        kind: "results",
-        url: "https://www.opensplittime.org/events/2026-rattlesnake-ramble-full-course/spread",
-      },
-      {
-        kind: "splits",
-        url: "https://www.opensplittime.org/efforts/2026-rattlesnake-ramble-full-course-david-parsons",
-      },
-      { kind: "strava", url: "https://www.strava.com/activities/20147865866" },
-    ],
-  },
-  {
-    date: "2026-08-15",
-    event: "Ed Anacker Bridger Ridge Run",
-    sport: "Trail",
-    location: "Bozeman, MT",
-    distance: "19.9 mi",
-    vert: "6,800 ft",
-    time: "4:44:25",
-    placing: {
-      overall: 34,
-      division: "Male 30–39",
-      divisionPlace: 6,
-    },
-    note: "9,500 ft of descent off the ridge",
-    links: [
-      { kind: "results", url: "https://my.raceresult.com/415694/" },
-      {
-        kind: "result",
-        url: "https://my.raceresult.com/415694/details1?pid=41",
-      },
-      { kind: "strava", url: "https://www.strava.com/activities/19758708717" },
-      {
-        kind: "photos",
-        url: "https://www.kurtwehde.com/Bridger-Ridge-Run-2026",
-      },
-      {
-        kind: "instagram",
-        url: "https://www.instagram.com/p/DcG9AQMkV2Z/?img_index=1",
-      },
-    ],
-  },
-  {
-    date: "2026-02-21",
-    event: "Audi Power of Four",
-    sport: "Skimo",
-    location: "Aspen, CO",
-    distance: "24 mi",
-    vert: "10,000 ft",
-    time: "7:43:41",
-    placing: { division: "P4 Coed", divisionPlace: 1, divisionField: 13 },
-    note: "Freaks in the Steeps, with Annie Weinmann",
-    links: [
-      { kind: "results", url: "https://my.raceresult.com/369443/" },
-      {
-        kind: "result",
-        url: "https://my.raceresult.com/369443/details?pid=76",
-      },
-    ],
-  },
-];
-
-/** Newest first, whatever order they were written in above. */
-export const races: Race[] = [...log].sort((a, b) =>
-  b.date.localeCompare(a.date),
-);
+/** Newest first. */
+export function sortRaces(races: Race[]): Race[] {
+  return [...races].sort((a, b) => b.date.localeCompare(a.date));
+}
 
 export const raceYear = (race: Race) => Number(race.date.slice(0, 4));
 
@@ -221,7 +129,7 @@ export function isPodium(race: Race): boolean {
 }
 
 /** Newest first, grouped into the years they fall in. */
-export function racesByYear(): { year: number; races: Race[] }[] {
+export function racesByYear(races: Race[]): { year: number; races: Race[] }[] {
   const groups: { year: number; races: Race[] }[] = [];
   for (const race of races) {
     const year = raceYear(race);
@@ -241,8 +149,25 @@ const seconds = (time?: string) => {
   return parts.reduce((total, part) => total * 60 + part, 0);
 };
 
-/** The numbers in the band at the top of the page. */
-export function raceStats() {
+/**
+ * The numbers in the band at the top of the page.
+ *
+ * Guards an empty list: the log comes off the network now, so "no races" is
+ * a state that can actually happen, and Math.min of nothing is -Infinity.
+ */
+export function raceStats(races: Race[]) {
+  if (!races.length) {
+    return {
+      count: 0,
+      firstYear: undefined,
+      lastYear: undefined,
+      span: "",
+      vert: "0",
+      longest: "—",
+      podiums: 0,
+    };
+  }
+
   const years = races.map(raceYear);
   const first = Math.min(...years);
   const last = Math.max(...years);
@@ -253,8 +178,8 @@ export function raceStats() {
 
   return {
     count: races.length,
-    firstYear: first,
-    lastYear: last,
+    firstYear: first as number | undefined,
+    lastYear: last as number | undefined,
     /** "2026", or "2024–2026" once there is more than one year. */
     span: first === last ? `${first}` : `${first}–${last}`,
     vert: races

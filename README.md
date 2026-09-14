@@ -21,7 +21,8 @@ npm run dev
 | `app/athlete/` | The athlete section — its own palette and chrome, three routes. |
 | `components/athlete/` | Chrome and rows for that section only; the writing side is untouched. |
 | `lib/notes.ts` | Reads and sorts the MDX files. |
-| `lib/strava.ts` | The live Strava feed. Server-only; holds the credentials. |
+| `lib/strava.ts` | The live Strava feed and the race log. Server-only; holds the credentials. |
+| `content/race-details.json` | Per-race details Strava cannot know. |
 | `scripts/strava-token.mjs` | One-time Strava authorisation. Not part of the build. |
 | `lib/site.ts` | Name, URL, email, nav and social links — one place to change them. |
 | `components/mdx-components.tsx` | Prose styling for post bodies. |
@@ -46,42 +47,51 @@ together or the paper ground shows through in overscroll.
 
 ## Adding a race
 
-Add one object to `races` in `content/races.ts` — anywhere in the array, the
-list sorts itself by date. Only `date`, `event`, `sport` and `location` are
-required; leave out anything the results did not publish and the row still
-reads cleanly (a missing figure shows as an em dash rather than a zero).
+The race log comes from Strava, merged with `content/race-details.json`.
+Strava supplies the date, distance, vert, time and sport; the JSON supplies
+everything Strava cannot know — the event's real name, where it was, how you
+placed, and the organisers' links.
 
-```ts
-{
-  date: "2027-03-27",              // ISO. The year, the grouping and the
-  event: "Grand Traverse",         // displayed date all derive from this.
-  sport: "Skimo",                  // Skimo | Trail | Road | Bike | Climb
-  location: "Crested Butte, CO",
-  distance: "40 mi",
-  vert: "7,800 ft",
-  time: "11:06:44",
-  placing: { overall: 71, field: 200 },
-  note: "Team, with Annie Weinmann",
-  links: [
-    { kind: "results", url: "…" },
-    { kind: "strava", url: "…" },
-  ],
+To add a race, open the activity on Strava, take the id off the end of the
+URL, and add a block keyed by it:
+
+```json
+"20147865866": {
+  "date": "2026-09-12",
+  "event": "Rattlesnake Ramble",
+  "location": "Eldorado Canyon State Park, CO",
+  "placing": { "overall": 40, "field": 114 },
+  "links": [{ "kind": "results", "url": "…" }]
 }
 ```
 
-`placing` also takes `division`, `divisionPlace` and `divisionField` for a
-category result. A top-three finish overall or in a division is highlighted
-in the accent automatically — there is no flag to set and no way to forget.
+Every field is optional except `date`, which is there so the file reads on
+its own and so the page still has a log if Strava is unreachable during a
+build. A race with only half its details still lists cleanly — a missing
+figure shows as an em dash rather than a zero. `distance`, `vert`, `time` and
+`sport` override Strava when the official result disagrees with the GPS.
 
-`links` renders as the `[results] [strava]` chips under the event name, the
-same idiom the speaking page uses. The kinds are a fixed list (`event`,
-`results`, `result`, `splits`, `strava`, `photos`, `instagram`, `report`) so
-labels stay consistent; add a `label` to override one, or a new kind to
-`RaceLinkKind` and `linkLabels` together.
+### Which activities count as races
 
-This is TypeScript rather than a JSON file on purpose: `npm run build` fails
-on a typo'd field, an unknown sport or a malformed link, and the editor
-autocompletes the enums. JSON would ship those mistakes silently.
+Strava marks races with `workout_type` — 1 on a run, 11 on a ride. **There is
+no equivalent for ski touring**, so a skimo race cannot be flagged at all.
+That is why the detail file has a `race` field:
+
+- `"race": true` — a race Strava does not flag. Every ski race needs this.
+- `"race": false` — drop something Strava flagged that was not really a race.
+- omitted — trust Strava's flag.
+
+A race that Strava already flags needs no entry at all; it will appear using
+the activity's own name. Add an entry when you want to correct the name or
+fill in the details.
+
+Times come from Strava's *elapsed* time rather than moving time, since a race
+clock does not stop when you do — override `time` with the official chip time
+where you have it.
+
+A multi-activity race (a triathlon logged as five legs, say) gets one entry
+on any one of its activities, with `distance`, `vert` and `time` overridden to
+the totals for the whole event.
 
 ## Adding a post
 
