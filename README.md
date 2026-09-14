@@ -21,6 +21,8 @@ npm run dev
 | `app/athlete/` | The athlete section — its own palette and chrome, three routes. |
 | `components/athlete/` | Chrome and rows for that section only; the writing side is untouched. |
 | `lib/notes.ts` | Reads and sorts the MDX files. |
+| `lib/strava.ts` | The live Strava feed. Server-only; holds the credentials. |
+| `scripts/strava-token.mjs` | One-time Strava authorisation. Not part of the build. |
 | `lib/site.ts` | Name, URL, email, nav and social links — one place to change them. |
 | `components/mdx-components.tsx` | Prose styling for post bodies. |
 | `design/` | The design canvas artboards the visual direction came from. Not part of the build. |
@@ -135,6 +137,118 @@ arrives if they press send there. Nothing is stored server-side, so an
 abandoned draft is lost. True server-side capture needs a credential of some
 kind (a [Resend](https://resend.com) API key, or SMTP details) — a server
 cannot send mail as nobody.
+
+## The Strava feed
+
+The "last two weeks" band on `/athlete` is live. `lib/strava.ts` fetches the
+window's activities, and the page renders them as a table plus a
+per-discipline split — the multisport spread is the point of the section, and
+a column of glyphs alone does not say it.
+
+The window is a rolling fourteen days (`WINDOW_DAYS`), not the last two
+calendar weeks: those would be eight days long on a Monday morning and
+fourteen on a Sunday night, so the band would keep emptying out at the start
+of each week. The table shows the twelve most recent (`MAX_ROWS`) and links
+out for the rest; the totals and the split always count the whole window.
+
+### Setting it up
+
+Strava has no "API key you paste into a config". Access tokens expire after six
+hours, so the credential the site stores is a **refresh token**, exchanged for
+a fresh access token whenever one is needed.
+
+1. Create an app at <https://www.strava.com/settings/api>. Set **Authorization
+   Callback Domain** to exactly `localhost`.
+2. Put the client id and secret in `.env.local`:
+
+   ```
+   STRAVA_CLIENT_ID=12345
+   STRAVA_CLIENT_SECRET=…
+   ```
+
+3. Authorise it once, in a browser:
+
+   ```
+   npm run strava:token
+   ```
+
+   It prints an authorise URL, catches the callback on the first free port it
+   finds (8787 upwards), exchanges the code and prints a refresh token. Nothing
+   is written to disk. Strava checks the callback *domain*, not the port, so
+   whichever it lands on is fine; `PORT=9000 npm run strava:token` pins one.
+
+4. Add that token to `.env.local` and to the Vercel project settings, for all
+   three environments:
+
+   ```
+   STRAVA_REFRESH_TOKEN=…
+   ```
+
+   ```bash
+   vercel env add STRAVA_CLIENT_ID
+   vercel env add STRAVA_CLIENT_SECRET
+   vercel env add STRAVA_REFRESH_TOKEN
+   ```
+
+With any of the three missing, `fetchRecentTraining` returns null and the
+section is not rendered — the page has no gap and no error state. A
+successfully fetched window with nothing in it is a different thing, and says
+"Nothing logged in the last two weeks."
+
+### How it stays secure
+
+None of the three variables is `NEXT_PUBLIC_`, so none is inlined into client
+JavaScript. The stronger guarantee is the first line of `lib/strava.ts`:
+
+```ts
+import "server-only";
+```
+
+Importing that module from a client component fails the build rather than
+shipping a credential to a browser. That is the property worth keeping — it
+holds even if someone later adds an innocent-looking import.
+
+What actually crosses to the browser is finished display strings (`"6.2 mi"`,
+`"1:12:08"`) and public `strava.com/activities/…` URLs. The access token, the
+refresh token and the raw API payload never leave the server, and no GPS or
+location data is read at all.
+
+Strava cannot distinguish trail from road — nearly everything logs as the
+generic `Run` — so `SPORTS` in `lib/strava.ts` maps `Run` to `Trail`, which is
+where almost all of it happens. `Road` is left to the race log, where it is set
+by hand for an actual road race. It is one line to flip.
+
+**Private activities are filtered out.** The token is scoped
+`activity:read_all`, which *can* read them — so `isPublic()` drops anything
+whose `visibility` is not `everyone` (or that carries the older `private`
+flag) before it reaches the page. Being able to read a private ski tour and
+republishing it are different decisions, and only the second one is the
+site's to make. Narrow the scope to `activity:read` in
+`scripts/strava-token.mjs` if you would rather the token could not see them.
+
+Requests carry an eight-second timeout so a slow Strava cannot hang a render,
+and failures log a status code rather than a response body — an OAuth error
+body echoes back what was sent, secret included.
+
+### Rate limits and freshness
+
+`/athlete` is statically rendered with a 30-minute `revalidate`, so the page is
+regenerated on a schedule rather than per visitor. That is two Strava requests
+a half hour against this app's limits of 400 per fifteen minutes and 4,000 a
+day, and the access token is reused across renders until it actually expires.
+
+The two halves of that number live in `TRAINING_REVALIDATE_SECONDS`
+(`lib/strava.ts`) and the `revalidate` export in `app/athlete/page.tsx` —
+Next needs the second to be a literal it can read statically, so they are
+written out separately. Change them together.
+
+### If the feed stops updating
+
+Strava may hand back a **new refresh token** at any exchange. There is nowhere
+for a serverless render to write one, so `lib/strava.ts` logs a warning when it
+sees one change rather than failing quietly six hours later. If the band stops
+updating, check the Vercel function logs — a 400 on the token refresh means
+`STRAVA_REFRESH_TOKEN` is stale. Re-run `npm run strava:token` and update it.
 
 ## Redirects from the old site
 

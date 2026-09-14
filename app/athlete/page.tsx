@@ -5,7 +5,7 @@ import {
   AlpenglowFooter,
 } from "@/components/athlete/athlete-chrome";
 import { StatBand } from "@/components/athlete/stat-band";
-import { StravaWeek } from "@/components/athlete/strava-week";
+import { StravaRecent } from "@/components/athlete/strava-recent";
 import { RaceRow } from "@/components/athlete/race-row";
 import { races, raceStats } from "@/content/races";
 import { climbing, gear, objectives } from "@/content/athlete";
@@ -14,9 +14,17 @@ const stats = raceStats();
 
 export const metadata: Metadata = {
   title: "Athlete",
-  description: `Amateur skimo, trail running and climbing out of Boulder, Colorado — every race logged, ${stats.count} of them so far.`,
+  description: `Multisport amateur out of Boulder, Colorado — skimo, trail, bike and rock. Every race logged, ${stats.count} of them so far.`,
   alternates: { canonical: "/athlete" },
 };
+
+/**
+ * The Strava band below is live, so this page is regenerated on a schedule
+ * rather than pinned at build time. Matches TRAINING_REVALIDATE_SECONDS in
+ * lib/strava.ts — Next needs this one to be a literal it can read statically,
+ * so the two are written out separately. Change them together.
+ */
+export const revalidate = 1800;
 
 /** Layered ridge line standing in until a real hero photograph lands. */
 function Ridge() {
@@ -113,7 +121,7 @@ export default function AthletePage() {
           <Ridge />
           <div className="relative flex flex-col gap-4 px-6 pt-14 pb-10 sm:px-12 sm:pb-14 lg:px-20">
             <span className="font-mono text-[11px] tracking-[0.2em] text-alp-accent uppercase">
-              Amateur · Boulder, Colorado
+              Multisport amateur · Boulder, Colorado
             </span>
             <h1 className="font-display text-[52px] leading-[0.88] text-alp-ink sm:text-[88px] lg:text-[104px]">
               Not a pro.
@@ -121,15 +129,16 @@ export default function AthletePage() {
               Still counting.
             </h1>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-alp-body text-pretty sm:text-[18px]">
-              Skimo through the winter, trail races all summer, and rock
-              whenever the Flatirons are dry. Every race I finish gets logged
-              here — {stats.count} of them so far.
+              Four sports, one season. Skimo through the winter, trail races
+              all summer, the bike in between, and rock whenever the Flatirons
+              are dry. Every race I finish gets logged here — {stats.count} of
+              them so far.
             </p>
           </div>
         </section>
 
         <StatBand />
-        <StravaWeek />
+        <StravaRecent />
 
         <section className="px-6 pt-12 sm:px-12 sm:pt-13 lg:px-20">
           <div className="flex flex-col gap-3 pb-4 sm:flex-row sm:items-baseline sm:justify-between">

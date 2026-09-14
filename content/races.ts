@@ -28,6 +28,16 @@
 
 export type Sport = "Skimo" | "Trail" | "Road" | "Bike" | "Climb";
 
+/**
+ * Everything the site can draw a mark for.
+ *
+ * A race is always one of the five above — those are the ones raced. The
+ * Strava feed is wider than the race log, though: a swim, a lift or a yoga
+ * class is a real part of a multisport week and lands on `Other` rather than
+ * being dropped or dressed up as a run.
+ */
+export type GlyphSport = Sport | "Other";
+
 /** Known link kinds, so every race's links render with a consistent label. */
 export type RaceLinkKind =
   | "event"

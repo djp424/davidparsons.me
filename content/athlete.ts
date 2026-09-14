@@ -1,14 +1,3 @@
-import type { Sport } from "./races";
-
-export type Activity = {
-  day: string;
-  name: string;
-  sport: Sport;
-  distance: string;
-  vert: string;
-  time: string;
-};
-
 export type Send = {
   route: string;
   grade: string;
@@ -19,52 +8,6 @@ export type Send = {
 export type GearItem = { category: string; item: string };
 
 export type Objective = { when: string; what: string; goal: string };
-
-/**
- * Sample week. Swap `week` for a Strava fetch once the API app exists:
- * exchange STRAVA_REFRESH_TOKEN at /oauth/token for an access token (they
- * expire after ~6 hours, so a static token will not hold), call
- * /athlete/activities, and cache the result with `revalidate` so the page
- * is not hitting Strava on every request. Nothing outside this module and
- * <StravaWeek /> needs to change.
- */
-export const week = {
-  totals: { distance: "41.7 mi", vert: "7,850 ft", time: "6h 22m" },
-  activities: [
-    {
-      day: "Sat",
-      name: "Green Mountain via Amphitheater",
-      sport: "Trail",
-      distance: "6.2 mi",
-      vert: "2,540 ft",
-      time: "1:12:08",
-    },
-    {
-      day: "Thu",
-      name: "Marshall Mesa tempo",
-      sport: "Trail",
-      distance: "9.4 mi",
-      vert: "620 ft",
-      time: "1:08:44",
-    },
-    {
-      day: "Wed",
-      name: "Flagstaff repeats",
-      sport: "Bike",
-      distance: "18.1 mi",
-      vert: "2,100 ft",
-      time: "1:34:02",
-    },
-    {
-      day: "Tue",
-      name: "Eldo approach + Bastille Crack",
-      sport: "Climb",
-      distance: "1.8 mi",
-      vert: "1,100 ft",
-      time: "2:27:00",
-    },
-  ] satisfies Activity[],
-};
 
 export const climbing = {
   bests: [
@@ -108,6 +51,6 @@ export const objectives: Objective[] = [
 ];
 
 export const elsewhere = {
-  strava: "https://www.strava.com/athletes/djp424",
+  strava: "https://www.strava.com/athletes/34512686",
   mountainProject: "https://www.mountainproject.com/user/djp424",
 };

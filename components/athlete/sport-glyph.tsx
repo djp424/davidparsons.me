@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
-import type { Sport } from "@/content/races";
+import type { GlyphSport } from "@/content/races";
 
 /**
  * Stroke-based sport marks on a 20px grid — drawn rather than set in a font
  * so they scale and pick up currentColor. Keep them to a handful of strokes:
  * they render at 18px in the race table, where detail turns to mush.
  */
-const marks: Record<Sport, ReactNode> = {
+const marks: Record<GlyphSport, ReactNode> = {
   // A pair of skis side-on. The upturned tip is the only thing that says
   // "ski" at this size, so it gets a real hook and everything else goes.
   Skimo: (
@@ -38,13 +38,19 @@ const marks: Record<Sport, ReactNode> = {
   Climb: (
     <path d="M10 3.2c3 0 5 2.4 5 5.4v3.6c0 2.6-2.2 4.6-5 4.6s-5-2-5-4.6V8.6c0-3 2-5.4 5-5.4Z M10 3.2v6" />
   ),
+  // An effort trace, for the swim, the gym session, the yoga class — the
+  // parts of a multisport week that are training time rather than a
+  // discipline the site races. A stopwatch was the obvious choice and the
+  // wrong one: at 16px its round body and top stem read as the carabiner
+  // above. This shares no silhouette with any of the five.
+  Other: <path d="M2.4 10h3.1l2-4.8 2.7 9.6 2-4.8h5.4" />,
 };
 
 export function SportGlyph({
   sport,
   size = 18,
 }: {
-  sport: Sport;
+  sport: GlyphSport;
   size?: number;
 }) {
   return (
