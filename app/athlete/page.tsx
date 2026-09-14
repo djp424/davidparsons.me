@@ -14,7 +14,7 @@ const stats = raceStats();
 
 export const metadata: Metadata = {
   title: "Athlete",
-  description: `Multisport amateur out of Boulder, Colorado — skimo, trail, bike and rock. Every race logged, ${stats.count} of them so far.`,
+  description: `Multisport athlete out of Boulder, Colorado — skimo, trail, bike and rock. Every race logged, ${stats.count} of them so far.`,
   alternates: { canonical: "/athlete" },
 };
 
@@ -121,18 +121,17 @@ export default function AthletePage() {
           <Ridge />
           <div className="relative flex flex-col gap-4 px-6 pt-14 pb-10 sm:px-12 sm:pb-14 lg:px-20">
             <span className="font-mono text-[11px] tracking-[0.2em] text-alp-accent uppercase">
-              Multisport amateur · Boulder, Colorado
+              Multisport athlete · Boulder, Colorado
             </span>
             <h1 className="font-display text-[52px] leading-[0.88] text-alp-ink sm:text-[88px] lg:text-[104px]">
-              Not a pro.
+              Four sports.
               <br />
               Still counting.
             </h1>
             <p className="max-w-[620px] text-[16px] leading-[1.6] text-alp-body text-pretty sm:text-[18px]">
-              Four sports, one season. Skimo through the winter, trail races
-              all summer, the bike in between, and rock whenever the Flatirons
-              are dry. Every race I finish gets logged here — {stats.count} of
-              them so far.
+              Skimo through the winter, trail races all summer, the bike in
+              between, and rock whenever the Flatirons are dry. Every race I
+              finish gets logged here — {stats.count} of them so far.
             </p>
           </div>
         </section>

@@ -140,16 +140,27 @@ cannot send mail as nobody.
 
 ## The Strava feed
 
-The "last two weeks" band on `/athlete` is live. `lib/strava.ts` fetches the
-window's activities, and the page renders them as a table plus a
-per-discipline split — the multisport spread is the point of the section, and
-a column of glyphs alone does not say it.
+Two things on `/athlete` come from Strava.
 
-The window is a rolling fourteen days (`WINDOW_DAYS`), not the last two
-calendar weeks: those would be eight days long on a Monday morning and
-fourteen on a Sunday night, so the band would keep emptying out at the start
-of each week. The table shows the twelve most recent (`MAX_ROWS`) and links
-out for the rest; the totals and the split always count the whole window.
+**Recent activities** — the last ten logged (`RECENT_LIMIT`), rendered as a
+table plus a per-discipline split. The spread is the point of the section, and
+a column of glyphs alone does not say it. The request over-fetches
+(`RECENT_FETCH`) because anything not public is dropped before the slice, so
+a couple of private sessions would otherwise short the list.
+
+**Feet climbed this year** — the vert cell in the stat band, every foot
+climbed in the current year rather than just on race days. That needs several
+requests to total up, so it is cached for a day
+(`YTD_REVALIDATE_SECONDS`) while the page around it regenerates every half
+hour. If Strava is unreachable the cell falls back to the race log's own
+total and relabels itself, so it never reads as a yearly figure while showing
+a races-only one.
+
+Unlike the activity band, the year total counts private activities. It is an
+aggregate — one number about the year, revealing no individual session — and
+excluding them would quietly understate a real total the moment one is marked
+private. There is a one-line note in `fetchYearVert` showing how to change
+that.
 
 ### Setting it up
 
@@ -192,8 +203,8 @@ a fresh access token whenever one is needed.
 
 With any of the three missing, `fetchRecentTraining` returns null and the
 section is not rendered — the page has no gap and no error state. A
-successfully fetched window with nothing in it is a different thing, and says
-"Nothing logged in the last two weeks."
+successfully fetched account with nothing in it is a different thing, and
+says "Nothing logged on Strava yet."
 
 ### How it stays secure
 
@@ -233,9 +244,10 @@ body echoes back what was sent, secret included.
 ### Rate limits and freshness
 
 `/athlete` is statically rendered with a 30-minute `revalidate`, so the page is
-regenerated on a schedule rather than per visitor. That is two Strava requests
-a half hour against this app's limits of 400 per fifteen minutes and 4,000 a
-day, and the access token is reused across renders until it actually expires.
+regenerated on a schedule rather than per visitor. That is two Strava requests a
+half hour, plus roughly three more once a day for the year total, against this
+app's limits of 400 per fifteen minutes and 4,000 a day. The access token is
+reused across renders until it actually expires.
 
 The two halves of that number live in `TRAINING_REVALIDATE_SECONDS`
 (`lib/strava.ts`) and the `revalidate` export in `app/athlete/page.tsx` —

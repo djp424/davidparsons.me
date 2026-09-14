@@ -3,7 +3,8 @@ import "server-only";
 import type { GlyphSport } from "@/content/races";
 
 /**
- * The live Strava feed behind the "last two weeks" band on /athlete.
+ * The live Strava feed behind the "recent activities" band on /athlete, and
+ * the year-to-date vert in the stat band above it.
  *
  * `server-only` is the first line of defence: importing this module from a
  * client component is a build error, so the credentials below can never end
@@ -40,14 +41,14 @@ const ACTIVITIES_ENDPOINT = "https://www.strava.com/api/v3/athlete/activities";
 export const TRAINING_REVALIDATE_SECONDS = 1800;
 
 /**
- * How far back the band reaches, in calendar days including today.
+ * How long the year-to-date vert stays cached: one day.
  *
- * A rolling window rather than "since Monday": two calendar weeks would be
- * eight days long on a Monday morning and fourteen on a Sunday night, so the
- * band would keep emptying out at the start of each week. Rolling keeps it
- * honest to its own heading and always has something in it.
+ * That figure needs several requests to total up a year of training, so it
+ * gets its own, much longer TTL than the activity band. The page still
+ * regenerates every half hour; this number just comes out of Next's data
+ * cache all but once a day.
  */
-const WINDOW_DAYS = 14;
+export const YTD_REVALIDATE_SECONDS = 86_400;
 
 /**
  * Boulder. Strava already reports each activity's local wall clock, so the
@@ -59,13 +60,25 @@ const HOME_TIME_ZONE = "America/Denver";
 /** A hung Strava request must not hang the page render. */
 const REQUEST_TIMEOUT_MS = 8_000;
 
+/** How many activities the band lists. */
+const RECENT_LIMIT = 10;
+
 /**
- * Rows before the table gives up and points at Strava. Two weeks of this
- * athlete's training runs past twenty sessions, so this is a deliberate
- * trim rather than a ceiling nobody reaches — `hidden` below reports what
- * it cut.
+ * Activities to ask for to fill those rows. Anything not public is dropped
+ * before the slice, so the request has to over-fetch or a couple of private
+ * sessions would short the list.
  */
-const MAX_ROWS = 12;
+const RECENT_FETCH = 30;
+
+/** Strava's per-page maximum, used when totalling the year. */
+const MAX_PER_PAGE = 200;
+
+/**
+ * Pages to walk before giving up on the year total. At 200 an activity
+ * that is 2,000 sessions — far past a heavy year, so hitting this means
+ * something is wrong rather than that the athlete is busy.
+ */
+const MAX_YTD_PAGES = 10;
 
 /** Strava's `sport_type`, collapsed onto the marks the site actually draws. */
 const SPORTS: Record<string, GlyphSport> = {
@@ -122,12 +135,6 @@ export type RecentTraining = {
   /** Biggest discipline first. Empty if nothing was logged. */
   sports: SportSplit[];
   activities: LoggedActivity[];
-  /**
-   * Activities in the window beyond MAX_ROWS. The totals and the split
-   * above count them, so the table saying so keeps the two from
-   * contradicting each other on a big fortnight.
-   */
-  hidden: number;
 };
 
 /** The handful of fields used here, out of a very large response. */
@@ -179,44 +186,28 @@ function hoursAndMinutes(totalSeconds: number): string {
   return h ? `${h}h ${minutes % 60}m` : `${minutes}m`;
 }
 
-/**
- * The oldest date the band shows, as it reads on a wall in Boulder.
- *
- * Compared against each activity's `start_date_local`, which Strava has
- * already converted to the athlete's local clock, this makes the boundary
- * exact without the server needing to know its own timezone.
- */
-function windowStart(now: Date): string {
-  const today = new Intl.DateTimeFormat("en-CA", {
-    timeZone: HOME_TIME_ZONE,
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(now);
-
-  const start = new Date(`${today}T00:00:00Z`);
-  start.setUTCDate(start.getUTCDate() - (WINDOW_DAYS - 1));
-  return start.toISOString().slice(0, 10);
+/** The current year where the athlete lives, not where the server runs. */
+function currentYear(now: Date): number {
+  return Number(
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: HOME_TIME_ZONE,
+      year: "numeric",
+    }).format(now),
+  );
 }
 
 /**
- * "Sat 13". Noon UTC on the local calendar date, so the weekday can never
- * slip. The day number is what makes it readable over a fortnight — a bare
- * "Sat" appears twice in this window and says nothing about which.
+ * "Sep 13". Noon UTC on the local calendar date, so the day can never slip.
+ *
+ * A weekday was enough while the band was a bounded fortnight. "The last ten"
+ * has no span to lean on — after a quiet spell it can reach back weeks — so
+ * the label carries a month and a date instead.
  */
 function dayLabel(startDateLocal: string): string {
-  const at = new Date(`${startDateLocal.slice(0, 10)}T12:00:00Z`);
-  // Composed rather than asked for as one format: en-US renders a
-  // weekday+day request as "9 Wed", which reads backwards here.
-  const weekday = at.toLocaleDateString("en-US", {
-    weekday: "short",
-    timeZone: "UTC",
-  });
-  const day = at.toLocaleDateString("en-US", {
-    day: "numeric",
-    timeZone: "UTC",
-  });
-  return `${weekday} ${day}`;
+  return new Date(`${startDateLocal.slice(0, 10)}T12:00:00Z`).toLocaleDateString(
+    "en-US",
+    { month: "short", day: "numeric", timeZone: "UTC" },
+  );
 }
 
 /**
@@ -328,33 +319,24 @@ function describe(error: unknown): string {
   return "unknown error";
 }
 
+const sportOf = (activity: RawActivity): GlyphSport =>
+  SPORTS[activity.sport_type ?? activity.type ?? ""] ?? "Other";
+
 /**
- * The window's public activities, newest first, formatted for display.
- *
- * Returns null when Strava is unconfigured or unreachable, which the caller
- * renders as nothing at all. An empty `activities` array is a different
- * thing: a real, successfully fetched stretch with nothing in it.
+ * A shared guard for the activity endpoints: turns a Response into a list, or
+ * null, logging the reason without ever echoing a body.
  */
-export async function fetchRecentTraining(): Promise<RecentTraining | null> {
-  const token = await accessToken();
-  if (!token) return null;
-
-  const start = windowStart(new Date());
-  // Ask Strava for a day and a half more than the window so no timezone edge
-  // can clip the oldest morning; the exact boundary is applied below.
-  const after =
-    Math.floor(Date.parse(`${start}T00:00:00Z`) / 1000) - 36 * 60 * 60;
-
-  // 100 is Strava's per-page maximum, and a fortnight of this athlete's
-  // training runs well past the 50 a single week needed.
-  const url = `${ACTIVITIES_ENDPOINT}?after=${after}&per_page=100`;
-
+async function readActivities(
+  url: string,
+  token: string,
+  revalidate: number,
+): Promise<RawActivity[] | null> {
   let response: Response;
   try {
     response = await fetch(url, {
       headers: { authorization: `Bearer ${token}` },
       signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
-      next: { revalidate: TRAINING_REVALIDATE_SECONDS },
+      next: { revalidate },
     });
   } catch (error) {
     console.error("Strava activities request failed:", describe(error));
@@ -391,13 +373,40 @@ export async function fetchRecentTraining(): Promise<RecentTraining | null> {
     return null;
   }
 
-  const logged = (payload as RawActivity[]).filter(
-    (a) =>
-      typeof a?.id === "number" &&
-      typeof a.start_date_local === "string" &&
-      a.start_date_local.slice(0, 10) >= start &&
-      isPublic(a),
+  return payload as RawActivity[];
+}
+
+/**
+ * The ten most recent public activities, newest first, ready for display.
+ *
+ * Returns null when Strava is unconfigured or unreachable, which the caller
+ * renders as nothing at all. An empty `activities` array is a different
+ * thing: a real, successfully fetched account with nothing in it.
+ */
+export async function fetchRecentTraining(): Promise<RecentTraining | null> {
+  const token = await accessToken();
+  if (!token) return null;
+
+  // No `after`: the band is "the last ten", not a date range, so Strava's
+  // default newest-first ordering is the whole query.
+  const payload = await readActivities(
+    `${ACTIVITIES_ENDPOINT}?per_page=${RECENT_FETCH}`,
+    token,
+    TRAINING_REVALIDATE_SECONDS,
   );
+  if (!payload) return null;
+
+  const logged = payload
+    .filter(
+      (a) =>
+        typeof a?.id === "number" &&
+        typeof a.start_date_local === "string" &&
+        isPublic(a),
+    )
+    .sort((a, b) =>
+      (b.start_date_local ?? "").localeCompare(a.start_date_local ?? ""),
+    )
+    .slice(0, RECENT_LIMIT);
 
   const totals = logged.reduce<{
     distance: number;
@@ -412,22 +421,16 @@ export async function fetchRecentTraining(): Promise<RecentTraining | null> {
     { distance: 0, vert: 0, seconds: 0 },
   );
 
-  const newestFirst = [...logged].sort((a, b) =>
-    (b.start_date_local ?? "").localeCompare(a.start_date_local ?? ""),
-  );
-
-  const activities: LoggedActivity[] = newestFirst
-    .slice(0, MAX_ROWS)
-    .map((a) => ({
-      id: a.id as number,
-      day: dayLabel(a.start_date_local as string),
-      name: (a.name ?? "Untitled").trim().slice(0, 90),
-      sport: sportOf(a),
-      distance: miles(a.distance ?? 0),
-      vert: feet(a.total_elevation_gain ?? 0),
-      time: duration(a.moving_time ?? a.elapsed_time ?? 0),
-      url: `https://www.strava.com/activities/${a.id}`,
-    }));
+  const activities: LoggedActivity[] = logged.map((a) => ({
+    id: a.id as number,
+    day: dayLabel(a.start_date_local as string),
+    name: (a.name ?? "Untitled").trim().slice(0, 90),
+    sport: sportOf(a),
+    distance: miles(a.distance ?? 0),
+    vert: feet(a.total_elevation_gain ?? 0),
+    time: duration(a.moving_time ?? a.elapsed_time ?? 0),
+    url: `https://www.strava.com/activities/${a.id}`,
+  }));
 
   return {
     totals: {
@@ -435,20 +438,74 @@ export async function fetchRecentTraining(): Promise<RecentTraining | null> {
       vert: feet(totals.vert),
       time: hoursAndMinutes(totals.seconds),
     },
-    // Every discipline in the window, not just the rows that fit above.
+    // The same ten the table lists, so the header can never contradict it.
     sports: splitBySport(logged),
     activities,
-    hidden: Math.max(0, logged.length - activities.length),
   };
 }
 
-const sportOf = (activity: RawActivity): GlyphSport =>
-  SPORTS[activity.sport_type ?? activity.type ?? ""] ?? "Other";
+/**
+ * Total feet climbed so far this year, formatted "142,318" — or null if
+ * Strava cannot be reached, which the stat band falls back from.
+ *
+ * This walks every activity since 1 January, which is several requests, so
+ * it is cached for a day (YTD_REVALIDATE_SECONDS) rather than at the band's
+ * half-hourly rate.
+ *
+ * Unlike the band, this counts private activities too. It is an aggregate:
+ * it publishes a single number about the year and reveals no individual
+ * session, and leaving them out would quietly understate a real total the
+ * moment one gets marked private. Add `.filter(isPublic)` below to change
+ * that.
+ */
+export async function fetchYearVert(): Promise<string | null> {
+  const token = await accessToken();
+  if (!token) return null;
+
+  const year = currentYear(new Date());
+  // Local midnight on 1 January, minus a day so no zone offset can clip it.
+  const after = Math.floor(Date.parse(`${year}-01-01T00:00:00Z`) / 1000) - 86_400;
+
+  let meters = 0;
+  let counted = 0;
+
+  for (let page = 1; page <= MAX_YTD_PAGES; page++) {
+    const batch = await readActivities(
+      `${ACTIVITIES_ENDPOINT}?after=${after}&per_page=${MAX_PER_PAGE}&page=${page}`,
+      token,
+      YTD_REVALIDATE_SECONDS,
+    );
+
+    // A failure part-way through would silently undercount the year, which
+    // is worse than showing the race-log figure the stat band falls back to.
+    if (!batch) return null;
+
+    for (const activity of batch) {
+      // Strava pages by start_date; re-check the year on the local clock so a
+      // late-December session cannot leak in from the slack above.
+      if (activity.start_date_local?.slice(0, 4) !== String(year)) continue;
+      meters += activity.total_elevation_gain ?? 0;
+      counted++;
+    }
+
+    if (batch.length < MAX_PER_PAGE) break;
+
+    if (page === MAX_YTD_PAGES) {
+      console.warn(
+        `Strava year total stopped at ${MAX_YTD_PAGES} pages — the figure ` +
+          "may be short. Raise MAX_YTD_PAGES if this is a real year.",
+      );
+    }
+  }
+
+  if (!counted) return null;
+  return Math.round(meters * METERS_TO_FEET).toLocaleString("en-US");
+}
 
 /**
- * The window grouped by discipline, biggest first.
+ * The ten grouped by discipline, biggest first.
  *
- * This is the point of the band: a fortnight here is never one sport, and a
+ * This is the point of the band: ten sessions here are never one sport, and a
  * column of running rows reads as a running block unless the spread is said
  * out loud.
  */

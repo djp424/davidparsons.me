@@ -1,10 +1,29 @@
 import { raceStats } from "@/content/races";
+import { fetchYearVert } from "@/lib/strava";
 
-export function StatBand() {
+/**
+ * The four figures under the hero.
+ *
+ * Three come from the race log. The vert comes from Strava — every foot
+ * climbed this year, training included, not just the handful of days that
+ * were races. That number needs several requests to total up, so it is
+ * cached for a day (see YTD_REVALIDATE_SECONDS) while the page around it
+ * regenerates every half hour.
+ *
+ * If Strava is unconfigured or unreachable it falls back to the race log's
+ * own total, and the label changes with it — the cell never reads as a
+ * yearly figure while showing a races-only one.
+ */
+export async function StatBand() {
   const stats = raceStats();
+  const yearVert = await fetchYearVert();
+  const year = new Date().getFullYear();
+
   const cells = [
     { n: String(stats.count), label: "Races" },
-    { n: stats.vert, label: "Feet climbed" },
+    yearVert
+      ? { n: yearVert, label: `Feet climbed in ${year}` }
+      : { n: stats.vert, label: "Feet climbed racing" },
     { n: stats.longest, label: "Longest day" },
     {
       n: String(stats.podiums),

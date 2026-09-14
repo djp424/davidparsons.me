@@ -8,7 +8,7 @@ import {
 import { SportGlyph } from "./sport-glyph";
 
 /**
- * The last two weeks of training, live from Strava.
+ * The last ten things logged, live from Strava.
  *
  * An async server component: the fetch, the credentials and the raw payload
  * stay on the server (see lib/strava.ts) and the browser is handed finished
@@ -18,7 +18,7 @@ import { SportGlyph } from "./sport-glyph";
  * Three states, deliberately distinct:
  *   null      Strava unconfigured or unreachable — render nothing at all,
  *             rather than an error or a stale-looking empty table.
- *   no rows   a real fortnight off, which is worth saying out loud.
+ *   no rows   nothing logged at all, which is worth saying out loud.
  *   rows      the training.
  */
 export async function StravaRecent() {
@@ -28,19 +28,19 @@ export async function StravaRecent() {
 }
 
 /**
- * The band itself, given a window. Split out from the fetch above so the
- * markup can be rendered from a fixture without a network call or a
+ * The band itself, given the activities. Split out from the fetch above so
+ * the markup can be rendered from a fixture without a network call or a
  * credential.
  */
 export function TrainingBand({ recent }: { recent: RecentTraining }) {
-  const { totals, sports, activities, hidden } = recent;
+  const { totals, sports, activities } = recent;
   const resting = activities.length === 0;
 
   return (
     <section className="px-6 pt-12 sm:px-12 sm:pt-14 lg:px-20">
       <div className="flex flex-col gap-3 pb-4 sm:flex-row sm:items-baseline sm:justify-between">
         <h2 className="font-display text-[30px] tracking-[0.03em] sm:text-[34px]">
-          The last two weeks
+          Recent activities
         </h2>
         <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
           {!resting && (
@@ -66,13 +66,14 @@ export function TrainingBand({ recent }: { recent: RecentTraining }) {
         </div>
       </div>
 
-      {/* The spread, before the rows. Four sports in a fortnight is the point
-          of this section, and a reader scanning the table alone would miss it. */}
+      {/* The spread, before the rows. Several sports across ten sessions is
+          the point of this section, and a reader scanning the table alone
+          would miss it. */}
       {sports.length > 1 && <SportSplits sports={sports} />}
 
       {resting ? (
         <p className="border border-alp-hair bg-alp-panel px-6 py-5 text-[15px] text-alp-muted">
-          Nothing logged in the last two weeks.
+          Nothing logged on Strava yet.
         </p>
       ) : (
         <div className="flex flex-col border border-alp-hair bg-alp-panel">
@@ -108,14 +109,6 @@ export function TrainingBand({ recent }: { recent: RecentTraining }) {
             </a>
           ))}
         </div>
-      )}
-
-      {hidden > 0 && (
-        <p className="pt-[10px] font-mono text-[11px] tracking-[0.1em] text-alp-faint uppercase">
-          <a className="hover:text-alp-accent" href={elsewhere.strava} {...external}>
-            +{hidden} more on Strava &rarr;
-          </a>
-        </p>
       )}
     </section>
   );
